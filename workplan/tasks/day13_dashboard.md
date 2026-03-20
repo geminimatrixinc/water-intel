@@ -27,6 +27,11 @@ Wire the existing Next.js app to the FastAPI backend and build the three core vi
 2. **Risk card** — large score display + label + last updated
 3. **Anomaly table** — timestamp, anomaly_score, is_anomaly, top_features
 4. **Timeline chart** — anomaly score over time (simple line chart, use recharts or chart.js)
+5. **Data mode banner** — persistent label at top of dashboard:
+   > `Historical Analysis (2019–2024) · Live monitoring available with SCADA integration`
+   - Makes it clear this is real historical data, not a toy demo
+   - Plants the seed that the system can go real-time with sensor feeds
+   - Key "imagine this live" moment for water plant managers during demo
 
 ### Types
 - Define TypeScript interfaces matching API response shapes

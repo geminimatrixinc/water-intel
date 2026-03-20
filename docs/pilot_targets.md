@@ -33,7 +33,11 @@ Source: Turtle Island News, Feb 11, 2026 — "Federal action on water and wastew
 | **Ask for** | The Water/Wastewater Manager or Supervisor |
 | **Contact page** | https://www.sixnations.ca/contact-us/ |
 
-**Approach:** Walk-in or phone call — you’re local. Reference the Jan. 27 Council resolution. “Hi, I’m Mike, I’m Mohawk and I have an office here on Six Nations. I saw Council’s resolution about water infrastructure funding. I built a water quality monitoring tool and I can show you **5 years of trends from your actual watershed** — Big Creek, the Grand River at Brantford, at Dunnville, at Caledonia — 8 stations around your territory. It flags anomalies and shows risk patterns. I’d love to show it to whoever manages your water systems — it might support what Council is already pushing for.”
+**Approach:** Walk-in or phone call — you're local. Reference the Jan. 27 Council resolution.
+
+**Key pitch reframe:** Don't say "we replace your SCADA." Say: *"Your SCADA watches the water inside your plant. We watch the river upstream — so you know what's coming before it arrives."*
+
+"Hi, I'm Mike, I'm Mohawk and I have an office here on Six Nations. I saw Council's resolution about water infrastructure funding. I built something I think could help — a water quality early warning system. Right now your plant sensors watch the water at the intake. My tool watches the river *upstream* — Big Creek, the Grand River at Brantford, Dunnville, Caledonia — 8 stations around your territory. It uses machine learning on **5 years of provincial data** to flag anomalies and show risk patterns before they reach the plant. I'd love to show it to whoever manages your water systems — it's a 90-second demo on your actual watershed data, and it could support what Council is already pushing for."
 
 **AI prompt to draft email/call script:**
 ```
@@ -229,6 +233,48 @@ be interested in a collaboration.
 3. Targets 3–5 are email-based — use the AI prompts in `docs/AI_OUTREACH_PLAYBOOK.md`.
 4. Target 6 is for when you're ready to pursue Mitacs funding.
 5. **You only need ONE to say yes.**
+
+---
+
+## Outreach Scripts — Ready to Use
+
+### In-Person Script (30 seconds — drop off a card and leave)
+
+> "Hey, I'm Mike — I'm Mohawk, I have an office here on Six Nations. I built a water quality tool that analyzes 5 years of Grand River data from the provincial monitoring network — 8 stations around your territory. I'm not selling anything — I'm trying to figure out if it's useful to someone who actually manages water systems. Can I leave you my card and a link to the demo? If you have 2 minutes sometime, I'd love to hear what you think."
+
+**Then leave.** Don't linger. Let the demo do the work.
+
+### Follow-Up Email Template (after in-person visit or cold)
+
+> **Subject:** Grand River water quality tool — would love your feedback
+>
+> Hi [name],
+>
+> I stopped by earlier — I'm Mike, Mohawk, office on Six Nations. I built an early warning tool that analyzes 5 years of provincial water quality data from 8 stations around Six Nations. It uses machine learning to flag anomalies — things like the conductivity spikes at York or iron surges at Fairchild Creek.
+>
+> I'm not selling anything. I'm building this because I think it could help communities like ours, and I need feedback from someone who actually knows what this data means.
+>
+> Here's the live demo: [link]
+>
+> If any of the anomalies it flags match things you've seen in practice, I'd love to hear about it. And if it's off base, that's useful too.
+>
+> — Mike  
+> Gemini Matrix Consulting  
+> [phone] · [email]
+
+### What "success" looks like at this stage
+
+You don't need a contract. You don't need a yes. You need the plant manager to look at the demo and say:
+
+> *"Huh, that conductivity spike — yeah, I remember that."*
+
+That's validation. Everything else follows from there.
+
+### If you get blown off in person
+
+That's normal. Plant managers are busy and get approached by vendors constantly. **It's not personal.** The email with the demo link is actually the stronger move for technical people — they can explore the dashboard at 8pm after their shift, poke around the stations, and form their own opinion without pressure. They're more likely to engage honestly with a screen they can explore alone.
+
+---
 
 ## Key Advantage You Have
 

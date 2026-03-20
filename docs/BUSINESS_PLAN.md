@@ -49,10 +49,15 @@ Gemini Matrix Consulting is an Indigenous-owned technology consulting company bu
 - Root causes are systemic: infrastructure, monitoring, operator capacity, and data gaps
 
 ### The Gap We Fill
-Current monitoring is largely **reactive** — advisories are issued *after* contamination is detected or systems fail. There is no widely deployed **predictive/early-warning** layer for community water systems.
+Current monitoring is largely **reactive** — advisories are issued *after* contamination is detected or systems fail. Existing SCADA systems watch water *inside the treatment plant*. Nobody is systematically watching the river *upstream* — where contamination events originate.
 
-Water-Intel provides that layer:
-- **Continuous anomaly monitoring** on water quality time-series
+**Water-Intel fills that gap.** Their SCADA says "turbidity is 4.2 right now." Our system says "conductivity at the upstream station jumped 3x its 30-day average while iron spiked simultaneously — this pattern matches contamination events we've flagged before."
+
+> **Positioning:** "Your SCADA watches the water inside your plant. We watch the river upstream — so you know what's coming before it arrives."
+
+Water-Intel provides the intelligence layer that doesn't exist today:
+- **Upstream source water monitoring** — tracking what's coming *before* it reaches the intake
+- **Multi-parameter anomaly detection** — ML models that see patterns across 100+ parameters simultaneously
 - **Risk scoring** that surfaces deteriorating trends before they trigger advisories
 - **Operator-friendly dashboard** that doesn't require ML expertise to use
 
@@ -142,13 +147,27 @@ Water-Intel provides that layer:
 
 ## 7. Competitive Landscape
 
-| Competitor/Alternative | Limitation | Our Advantage |
-|----------------------|------------|---------------|
-| Manual SCADA monitoring | Reactive, no ML, no early warning | Predictive analytics + risk scoring |
-| Government reporting (ISC) | Tracks advisories after the fact | Early detection before advisory |
-| Large consulting firms (Deloitte, WSP) | Expensive, not Indigenous-led, generic | Indigenous-owned, purpose-built, community-focused |
-| Academic research projects | Publish papers, don't ship products | We ship working software |
-| No solution (status quo) | Communities remain on advisories | Any improvement > status quo |
+| Competitor/Alternative | What They Do | Limitation | Our Advantage |
+|----------------------|-------------|------------|---------------|
+| **Plant SCADA systems** | Real-time sensors at treatment plant | Watches water *inside* the plant only — no upstream visibility, threshold alerts only (no ML) | We watch the **river upstream** — early warning before contamination reaches the plant |
+| **Manual grab sampling** | Weekly/monthly lab samples | Results take days; no trend analysis; data sits in spreadsheets | Real-time anomaly detection across 100+ params with 5-year trend context |
+| **Government reporting (ISC/PWQMN)** | Annual provincial reports | Data published 12–18 months late; tracks advisories after the fact | Same data, analyzed *now* with ML — turns annual reports into actionable intelligence |
+| **Large consulting firms (Deloitte, WSP)** | Water infrastructure consulting | Expensive, not Indigenous-led, generic reports | Indigenous-owned, purpose-built, community-focused, ships software not PDFs |
+| **Regulatory compliance software (Hach WIMS, CityWorks)** | Track readings against legal limits | Simple pass/fail against fixed thresholds — no pattern detection, no predictive capability | Multi-parameter anomaly detection finds patterns that fixed thresholds miss |
+| **Academic research projects** | Publish papers on water ML | Don't ship products, don't engage communities | We ship working software and walk into the plant |
+| **No solution (status quo)** | Nothing | Communities stay on advisories | Any improvement > status quo |
+
+### What Existing Systems Miss
+
+Most water plants operate at one of three levels:
+
+| Level | Typical Setup | Gap |
+|-------|--------------|-----|
+| **Level 1 — Small/rural/First Nations** | Manual grab samples, basic SCADA, spreadsheets | No trend analysis, no upstream monitoring, no ML |
+| **Level 2 — Mid-size municipal** | Automated SCADA + compliance software | Threshold alerts only — no anomaly detection, no source water intelligence |
+| **Level 3 — Large cities** | Sophisticated SCADA + historian databases | Some experimenting with statistics, but almost none use ML on source water |
+
+**Water-Intel sits in the gap between Level 1 infrastructure and Level 3 intelligence** — bringing upstream ML-powered monitoring to communities that currently have nothing.
 
 ---
 

@@ -212,3 +212,73 @@ These docs have the detail AI needs to write great content for you:
 - **One conversation is enough to start.** You don't need 50 contacts. You need 1 who cares.
 - **AI handles the words. You bring the authenticity.** That's a team.
 - **Every "no" is practice.** And every "not right now" might become "yes" later.
+
+---
+
+## Mike's Rules (Self-Awareness Section)
+
+These are patterns Mike identified about himself. They're here so AI and future collaborators can help navigate them.
+
+### The Build Trap
+> *"I'm really only good at the technical side. When doing this myself, I usually just quit."*
+
+**The pattern:** When outreach feels uncomfortable, the instinct is to retreat into building more features. More code feels productive. Sending emails feels vulnerable. So you keep building and never ship.
+
+**The rule:** For every day you build, send one email. Not three. One. Copy the template from `pilot_targets.md`, change the name, send. Then you've earned your build time guilt-free.
+
+**The trigger to watch for:** If you catch yourself starting Day N+1 without having sent any outreach in the past week, stop building. Open `pilot_targets.md`. Send one email. Then go back to code.
+
+### The Demo Does the Selling
+You don't have to be a salesperson. The live demo is your salesperson — and unlike you, it doesn't get discouraged.
+
+**Strategy:** Get the dashboard deployed to HostSigner with a real URL. Then outreach = sending a link. The plant manager can explore it at 8pm after their shift, on their own terms, no pressure. Technical people prefer this — they form their own opinions without someone hovering.
+
+### Silence ≠ Rejection
+Most outreach gets ignored. Response rates:
+- Cold outreach: ~5–10%
+- Warm outreach (community member like you): ~20–30%
+- You need 5–10 attempts to get 1–2 real conversations
+
+**Silence means "I'm busy" or "I forgot."** Not "your thing is bad." One follow-up at 7 days, one more at 14. If nothing after that, move to the next name. Not every door opens.
+
+### What Validation Looks Like
+You don't need a contract. You don't need a "yes." You need one plant manager to look at the demo and say:
+
+> *"Huh, that conductivity spike — yeah, I remember that."*
+
+That's it. That's validation. Everything else follows from there.
+
+### The Real Blocker
+The tech is not the risk. Funding is not the risk. The risk is closing the laptop and walking away from something that works. Plan for that like an engineer: set small commitments, automate what you can (the demo link does the talking), and find a partner for the non-technical side when funding allows.
+
+### Find a Co-Pilot (With Funding)
+Long-term, you need someone who handles outreach, follow-up, and relationship management. Options:
+- Community engagement coordinator (fundable through ISC/CIRNAC grants)
+- McMaster grad student (Mitacs covers their salary)
+- Indigenous business development org (NACCA, Two Row Architect)
+- Someone at Six Nations band office who gets excited about the project
+
+You don't have to become a salesperson. You have to find one.
+
+### Outreach Order of Operations
+Mike wants to try this himself first. That's the right instinct — own the process before delegating it.
+
+**Step 1 — Do it yourself.** Send the emails, drop by Public Works, follow up. Even awkward outreach builds muscle and teaches you what resonates. You learn more from 3 real conversations than from any playbook.
+
+**Step 2 — If traction stalls, engage your brother.**
+Mike's brother runs an engineering company, works in government, and has held various director-level roles in Indigenous sectors (energy). He has his own network in Indigenous government and infrastructure — likely deeper than Mike realizes. His office on Six Nations is Mike's headquarters.
+
+He is a **warm backup**, not a first move. The play:
+- *Only after* Mike has made his own outreach attempts and hit a wall
+- Show him the live demo — he'll understand the tech and the pitch instantly
+- **Keep the ask small and casual:** *"Who do you know that deals with water?"* — a name, maybe a text intro. That's it. 5 minutes.
+- **Do NOT ask him to co-found, invest time, or promote your project.** He has his own engineering/energy business with partners. He's made his own way. Water-Intel won't be as important to him as it is to you — and that's fine.
+- A warm intro from a known Indigenous government/energy director opens doors that cold emails can't
+- He may know people in water infrastructure through government circles — water is a top federal spending priority and it comes up constantly in Indigenous infrastructure conversations
+- He may also know funding channels from the energy sector that cross over to water
+
+**The conversation:** Don't lead with "help me with my business." Lead with showing the demo on his laptop — stations he probably recognizes. Then: *"I've been reaching out myself but hitting walls. Do you know anyone in water infrastructure who'd give me 5 minutes of feedback?"* Specific, low-effort, casual. Builders respect shipped work.
+
+**He may surprise you.** But don't count on it. Build the plan as if you're doing this alone. If he helps, it's a bonus.
+
+**Why wait:** Mike needs to own this process and build confidence in outreach before leaning on family connections. Running to a brother's network without trying first reinforces the avoidance pattern. But having him as a backup removes the "if I fail it's over" pressure — it's not over, there's a next move.
