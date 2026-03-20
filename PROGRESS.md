@@ -4,6 +4,17 @@
 
 ---
 
+### 2026-03-19 — Day 8: Baseline Anomaly Detection (Isolation Forest)
+- ✅ Done: `ml/src/models/anomaly_iforest.py` — full pipeline: load features → scale → IsolationForest → normalize scores → write CSV
+- ✅ Output: `outputs/anomalies.csv` — 13,194 rows, 660 anomalies (5.0% rate, within 3–8% target)
+- ✅ Config: contamination=0.05, n_estimators=200, random_state=42, n_jobs=-1
+- ✅ Verified: deterministic output (identical MD5 on re-run)
+- ✅ Top anomaly: CONDUCTIVITY 10,900 µS/cm at Grand River at York — real water quality event
+- ✅ Per-station anomaly rates: 2.0% (Glen Morris) to 8.1% (York) — reasonable spread
+- 🧠 Learned: fillna(0) is correct for structurally expected NaN (~4.5% from first readings per rolling window group)
+- 🧠 Fixed: scipy DLL import error (`_propack`) — resolved via pip upgrade scipy + scikit-learn
+- 🔥 Next: Day 9 — driver hints (top features contributing to each anomaly)
+
 ### 2026-03-19 — Day 7.5: Ontario PWQMN Data Sourcing (Grand River)
 - ✅ Done: Switched from BC/ECCC sample data to **Ontario Grand River watershed** — directly relevant to Six Nations pilot
 - ✅ Built: `ml/src/ingest/pwqmn_loader.py` — handles all 3 PWQMN schema versions (pre-2021, 2021-2022, 2023+)

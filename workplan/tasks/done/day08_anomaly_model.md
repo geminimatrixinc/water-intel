@@ -1,7 +1,7 @@
 # Day 8 — Baseline Anomaly Model (Isolation Forest)
 
 **Sprint:** Week 2 — Model + Explanations + Reports  
-**Status:** 🔲 Not Started  
+**Status:** ✅ Done  
 **Depends on:** Day 7.5 (Grand River data) ✅  
 **Blocked by:** Day 7.5
 
@@ -27,10 +27,10 @@ Train a baseline anomaly detection model using Isolation Forest on the engineere
 - Verify flagged anomalies make intuitive sense
 
 ## Acceptance Criteria
-- [ ] `outputs/anomalies.csv` generated with correct schema
-- [ ] Model runs deterministically (same output on re-run)
-- [ ] Anomaly rate is reasonable (~3–8% of readings)
-- [ ] At least one "makes sense" anomaly visible in data
+- [x] `outputs/anomalies.csv` generated with correct schema (13,194 rows, 660 anomalies)
+- [x] Model runs deterministically (same output on re-run) — MD5 verified
+- [x] Anomaly rate is reasonable: 5.0% overall (2.0%–8.1% per station)
+- [x] At least one "makes sense" anomaly: CONDUCTIVITY 10,900 µS/cm at York station
 
 ## Commit Message
 ```
