@@ -9,8 +9,8 @@
 
 | Week | Focus | Days | Status |
 |------|-------|------|--------|
-| **1** | Pipeline + First ML Result | 3–8 | 🟡 In Progress (Days 3–5, 7, 7.5, 8 done) |
-| **2** | Model + Explanations + Reports | 8–11 | 🔲 Not Started |
+| **1** | Pipeline + First ML Result | 3–8 | ✅ Complete |
+| **2** | Model + Explanations + Reports | 8–11 | 🟡 In Progress (Day 9 done) |
 | **3** | API + UI + Demo Pack | 12–14 | 🔲 Not Started (web skeleton exists) |
 | **4** | Company Website + Traction + Funding | 15–19 | 🔲 Not Started |
 
@@ -49,7 +49,7 @@ Day 5: build_processed.py
 | **7** | **Feature engineering** | [day07](tasks/done/day07_feature_engineering.md) | ✅ Done |
 | **7.5** | **Ontario PWQMN data sourcing** | [day07.5](tasks/done/day07_5_data_sourcing.md) | ✅ Done |
 | **8** | **Anomaly model (IForest)** | [day08](tasks/done/day08_anomaly_model.md) | ✅ Done |
-| 9 | Driver hints | [day09](tasks/day09_driver_hints.md) | 🔲 |
+| **9** | **Driver hints** | [day09](tasks/done/day09_driver_hints.md) | ✅ Done |
 | 10 | Site summary report | [day10](tasks/day10_site_summary.md) | 🔲 |
 | 11 | Risk score (0–100) | [day11](tasks/day11_risk_score.md) | 🔲 |
 | 12 | FastAPI backend | [day12](tasks/day12_fastapi.md) | 🔲 |

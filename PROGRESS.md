@@ -4,6 +4,14 @@
 
 ---
 
+### 2026-03-23 — Day 9: Anomaly Driver Hints
+- ✅ Done: `ml/src/models/driver_hints.py` — per-feature z-scores vs population, top 3 drivers per anomaly
+- ✅ Output: `outputs/anomalies.csv` enriched with `top_features` + `top_feature_values` columns (660 anomalies, all with hints)
+- ✅ Top drivers: rolling_mean_30 (57%), rolling_mean_14 (55%), rolling_mean_7 (53%) — rolling averages dominate, meaning anomalies are driven by sustained level shifts
+- ✅ Secondary drivers: rolling_std (volatility), delta/rate_of_change (spikes) — makes physical sense
+- 🧠 Learned: z-score approach is transparent and fast — no SHAP needed for MVP. Operators can read "rolling_mean_30: 3.01" as "this value is 3 standard deviations above the 30-reading average"
+- 🔥 Next: Day 10 — site summary report (one row per station)
+
 ### 2026-03-19 — Day 8: Baseline Anomaly Detection (Isolation Forest)
 - ✅ Done: `ml/src/models/anomaly_iforest.py` — full pipeline: load features → scale → IsolationForest → normalize scores → write CSV
 - ✅ Output: `outputs/anomalies.csv` — 13,194 rows, 660 anomalies (5.0% rate, within 3–8% target)

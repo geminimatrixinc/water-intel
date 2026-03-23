@@ -1,9 +1,9 @@
 # Day 9 — Anomaly Driver Hints
 
 **Sprint:** Week 2 — Model + Explanations + Reports  
-**Status:** 🔲 Not Started  
-**Depends on:** Day 8 (anomaly model) 🔲  
-**Blocked by:** Day 8
+**Status:** ✅ Done  
+**Depends on:** Day 8 (anomaly model) ✅  
+**Blocked by:** —
 
 ---
 
@@ -20,9 +20,9 @@ For each flagged anomaly, identify which features contributed most ("what trigge
   - `top_feature_values` — corresponding values
 
 ## Acceptance Criteria
-- [ ] Top 3 driver features per anomaly populated
-- [ ] Driver hints look reasonable (not random noise)
-- [ ] Output is human-readable (operator can glance and understand)
+- [x] Top 3 driver features per anomaly populated
+- [x] Driver hints look reasonable (not random noise)
+- [x] Output is human-readable (operator can glance and understand)
 
 ## Commit Message
 ```
