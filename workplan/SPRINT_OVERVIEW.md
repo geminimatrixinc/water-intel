@@ -10,7 +10,7 @@
 | Week | Focus | Days | Status |
 |------|-------|------|--------|
 | **1** | Pipeline + First ML Result | 3–8 | ✅ Complete |
-| **2** | Model + Explanations + Reports | 8–11 | 🟡 In Progress (Day 9 done) |
+| **2** | Model + Explanations + Reports | 8–11 | ✅ Complete |
 | **3** | API + UI + Demo Pack | 12–14 | 🔲 Not Started (web skeleton exists) |
 | **4** | Company Website + Traction + Funding | 15–19 | 🔲 Not Started |
 
@@ -51,7 +51,7 @@ Day 5: build_processed.py
 | **8** | **Anomaly model (IForest)** | [day08](tasks/done/day08_anomaly_model.md) | ✅ Done |
 | **9** | **Driver hints** | [day09](tasks/done/day09_driver_hints.md) | ✅ Done |
 | **10** | **Site summary report** | [day10](tasks/done/day10_site_summary.md) | ✅ Done |
-| 11 | Risk score (0–100) | [day11](tasks/day11_risk_score.md) | 🔲 |
+| **11** | **Risk score (0–100)** | [day11](tasks/done/day11_risk_score.md) | ✅ Done |
 | 12 | FastAPI backend | [day12](tasks/day12_fastapi.md) | 🔲 |
 | 13 | Dashboard wiring | [day13](tasks/day13_dashboard.md) | 🟡 skeleton exists |
 | 14 | Demo pack + pilot one-pager | [day14](tasks/day14_demo_pack.md) | 🔲 |

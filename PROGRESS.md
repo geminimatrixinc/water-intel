@@ -4,6 +4,14 @@
 
 ---
 
+### 2026-03-24 — Day 11: Risk Score v1 (0–100)
+- ✅ Done: `ml/src/models/risk_score.py` — composite 0–100 risk score + Safe/Watch/Concern labels
+- ✅ Output: `outputs/site_summary.csv` enriched with `risk_score` + `risk_label` (now 14 columns)
+- ✅ Formula: base (avg_anomaly_score → 0–60) + frequency (anomaly_rate → 0–40) = 0–100
+- ✅ Distribution: 24–76, mean 54 — 4 Concern / 3 Watch / 1 Safe — good spread for demo
+- ✅ Guardrail documented: "2A proxy score — does not predict ISC drinking water advisories"
+- 🔥 Next: Day 12 — FastAPI backend (serve ML outputs as JSON)
+
 ### 2026-03-24 — Day 10: Site Summary Report
 - ✅ Done: `ml/src/reports/site_summary.py` — one-row-per-station aggregation from anomalies + features
 - ✅ Output: `outputs/site_summary.csv` — 8 stations × 12 columns, zero NaN, sorted by anomaly rate

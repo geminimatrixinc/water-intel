@@ -1,9 +1,9 @@
 # Day 11 — Risk Score v1 (0–100)
 
 **Sprint:** Week 2 — Model + Explanations + Reports  
-**Status:** 🔲 Not Started  
-**Depends on:** Day 10 (site summary) 🔲  
-**Blocked by:** Day 10
+**Status:** ✅ Done
+**Depends on:** Day 10 (site summary) ✅
+**Blocked by:** —
 
 ---
 
@@ -27,10 +27,10 @@ Combine anomaly scores and frequency into a single 0–100 risk score with human
 - Labels are decision-support, not compliance certification
 
 ## Acceptance Criteria
-- [ ] Risk scores are deterministic and bounded [0, 100]
-- [ ] Labels map correctly to score ranges
-- [ ] Guardrail disclaimer is documented
-- [ ] Score distribution looks reasonable (not all 0 or all 100)
+- [x] Risk scores are deterministic and bounded [0, 100]
+- [x] Labels map correctly to score ranges
+- [x] Guardrail disclaimer is documented
+- [x] Score distribution looks reasonable (not all 0 or all 100)
 
 ## Commit Message
 ```
