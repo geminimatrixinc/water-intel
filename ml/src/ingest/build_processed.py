@@ -25,7 +25,7 @@ from src.ingest.eccc_loader import ECCCLoader
 from src.ingest.schema import NORMALIZED_REQUIRED_COLUMNS
 
 # Defaults
-DEFAULT_INPUT = PROJECT_ROOT / "data" / "sample" / "sample_water_quality.csv"
+DEFAULT_INPUT = PROJECT_ROOT / "data" / "raw" / "Water-Qual-Eau-Okanagan-Similkameen-2000-present.csv"
 DEFAULT_OUTPUT = PROJECT_ROOT / "data" / "processed" / "eccc_processed.csv"
 
 

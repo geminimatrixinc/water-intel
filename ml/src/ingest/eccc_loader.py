@@ -16,6 +16,7 @@ from .schema import (
     RAW_REQUIRED_COLUMNS,
     RAW_OPTIONAL_COLUMNS,
     COLUMN_MAPPING,
+    ECCC_HEADER_MAPPING,
     SchemaType,
 )
 from .validate import DataValidator, ValidationResult
@@ -137,6 +138,12 @@ class ECCCLoader:
         """
         # Load the data
         self.load()
+        
+        # Rename raw ECCC headers if present (e.g. SITE_NO -> site_no)
+        eccc_renames = {k: v for k, v in ECCC_HEADER_MAPPING.items()
+                        if k in self.raw_df.columns}
+        if eccc_renames:
+            self.raw_df.rename(columns=eccc_renames, inplace=True)
         
         # Validate schema
         validation = self.validate_schema()

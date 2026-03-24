@@ -90,6 +90,27 @@ NORMALIZED_DTYPES: Dict[str, str] = {
 
 
 # =============================================================================
+# ECCC HEADER MAPPING (original ECCC headers -> internal raw names)
+# Applied before schema validation when loading raw ECCC files.
+# =============================================================================
+
+ECCC_HEADER_MAPPING: Dict[str, str] = {
+    'SITE_NO': 'site_no',
+    'DATE_TIME_HEURE': 'sample_datetime',
+    'FLAG_MARQUEUR': 'qualifier_flag',
+    'VALUE_VALEUR': 'value',
+    'SDL_LDE': 'sdl',
+    'MDL_LDM': 'mdl',
+    'VMV_CODE': 'variable_code',
+    'UNIT_UNITÉ': 'unit',
+    'VARIABLE': 'variable',
+    'VARIABLE_FR': 'variable_fr',
+    'STATUS_STATUT': 'qa_status',
+    'SAMPLE_ID_ÉCHANTILLON': 'sample_id',
+}
+
+
+# =============================================================================
 # COLUMN MAPPING (raw -> normalized)
 # =============================================================================
 
