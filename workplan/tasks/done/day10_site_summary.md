@@ -1,9 +1,9 @@
 # Day 10 — Site Summary Report
 
 **Sprint:** Week 2 — Model + Explanations + Reports  
-**Status:** 🔲 Not Started  
-**Depends on:** Day 8 (anomaly model) 🔲  
-**Blocked by:** Day 8
+**Status:** ✅ Done
+**Depends on:** Day 8 (anomaly model) ✅
+**Blocked by:** —
 
 ---
 
@@ -19,9 +19,9 @@ Generate a per-site summary that powers the dashboard site picker and overview c
 - Optional: rolling 30-day anomaly count for trend
 
 ## Acceptance Criteria
-- [ ] `outputs/site_summary.csv` generated with correct schema
-- [ ] One row per station
-- [ ] Ready for API consumption (clean column names, no NaN in key fields)
+- [x] `outputs/site_summary.csv` generated with correct schema
+- [x] One row per station
+- [x] Ready for API consumption (clean column names, no NaN in key fields)
 
 ## Commit Message
 ```

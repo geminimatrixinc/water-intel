@@ -4,6 +4,14 @@
 
 ---
 
+### 2026-03-24 — Day 10: Site Summary Report
+- ✅ Done: `ml/src/reports/site_summary.py` — one-row-per-station aggregation from anomalies + features
+- ✅ Output: `outputs/site_summary.csv` — 8 stations × 12 columns, zero NaN, sorted by anomaly rate
+- ✅ Columns: station_id, total_readings, anomaly_count, anomaly_rate, last_reading_date, last_anomaly_date, avg_anomaly_score, parameter_count, date_range_start/end, top_anomaly_parameter, rolling_30d_anomaly_count
+- ✅ Top risk: station 16018409202 (8.13% anomaly rate), station 16018403502 (7.75%, 284 anomalies)
+- 🧠 Conductivity is the top anomaly parameter at 5 of 8 stations
+- 🔥 Next: Day 11 — risk score (0–100 composite)
+
 ### 2026-03-23 — Day 9: Anomaly Driver Hints
 - ✅ Done: `ml/src/models/driver_hints.py` — per-feature z-scores vs population, top 3 drivers per anomaly
 - ✅ Output: `outputs/anomalies.csv` enriched with `top_features` + `top_feature_values` columns (660 anomalies, all with hints)

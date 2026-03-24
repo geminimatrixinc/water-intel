@@ -50,7 +50,7 @@ Day 5: build_processed.py
 | **7.5** | **Ontario PWQMN data sourcing** | [day07.5](tasks/done/day07_5_data_sourcing.md) | ✅ Done |
 | **8** | **Anomaly model (IForest)** | [day08](tasks/done/day08_anomaly_model.md) | ✅ Done |
 | **9** | **Driver hints** | [day09](tasks/done/day09_driver_hints.md) | ✅ Done |
-| 10 | Site summary report | [day10](tasks/day10_site_summary.md) | 🔲 |
+| **10** | **Site summary report** | [day10](tasks/done/day10_site_summary.md) | ✅ Done |
 | 11 | Risk score (0–100) | [day11](tasks/day11_risk_score.md) | 🔲 |
 | 12 | FastAPI backend | [day12](tasks/day12_fastapi.md) | 🔲 |
 | 13 | Dashboard wiring | [day13](tasks/day13_dashboard.md) | 🟡 skeleton exists |
