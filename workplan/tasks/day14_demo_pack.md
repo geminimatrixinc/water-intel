@@ -1,9 +1,9 @@
 # Day 14 — Demo Pack + Pilot Artifact
 
 **Sprint:** Week 3 — API + UI + Demo Pack  
-**Status:** 🔲 Not Started  
-**Depends on:** Day 13 (dashboard) 🔲  
-**Blocked by:** Day 13
+**Status:** 🟡 In Progress  
+**Depends on:** Day 13 (dashboard) ✅  
+**Blocked by:** None
 
 ---
 
@@ -45,3 +45,7 @@ docs: pilot one-pager + demo script + screenshots
 ## Notes
 - The one-pager is the most important non-code deliverable in Phase 1
 - Test the demo with someone who hasn't seen the project — if they don't "get it" in 90 seconds, simplify
+- Dashboard clarity improvements are already in place: risk legend, recommended actions, timeline caption, and plain-language driver hints are live in the app
+- Dashboard disclosure copy is already in place: the app now clearly states it uses public historical PWQMN data and that real-time monitoring requires Phase 2 access
+- Raw Ontario source files were refreshed from the latest published 2023/2024 resources; current processed coverage now reaches as late as Dec 2024
+- Remaining Day 14 work is the packaging layer: demo script, one-pager, and current screenshots

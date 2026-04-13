@@ -114,6 +114,35 @@ Phase 2 adds:
   - CI/CD + Docker deployment
 ```
 
+## Phase 3 Architecture — MCP Agent Mesh (Vision)
+
+```
+Phase 3 adds:
+  - Water-Intel MCP Server: expose risk scores, anomalies, site data as MCP tools
+  - Water-Intel MCP Client: consume weather, water level, advisory, emergency data from other agents
+  - LLM-powered reasoning agent: orchestrates multi-source queries, generates briefings
+  - Federated agent mesh: community-owned agents share upstream/downstream intel
+  - OCAP®-aligned data scoping: tool-level permissions, consent-based sharing
+  - Edge deployment option: agents run on-prem for full data sovereignty
+```
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                    WATER-INTEL MCP SERVER                         │
+│                                                                  │
+│  MCP Tools:           MCP Resources:                             │
+│    get_risk_score       water://sites                            │
+│    get_anomalies        water://advisories                       │
+│    get_site_summary     water://data-dictionary                  │
+│    get_upstream_alert                                            │
+│                                                                  │
+│  ← consumes:  Weather MCP | Water Level MCP | Advisory MCP      │
+│  → serves:    Community agents | Policy agents | Health agents   │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+See [Roadmap — Phase 3](../workplan/Roadmap.md) for full implementation details.
+
 ### 6. Dual Data Loaders
 The pipeline supports two data sources through separate loaders that output the same normalized schema:
 - `eccc_loader.py` — ECCC National Long-term Water Quality Monitoring Data (transboundary rivers)

@@ -1,24 +1,19 @@
 import Link from "next/link";
 
-type WaterSite = {
-  id: string;
-  name: string;
-  region: string;
-  status: "Safe" | "Watch" | "Unsafe";
-  lastUpdated: string;
-};
+import { getAppUrl } from "../lib/api";
+import { formatDisplayDate } from "../lib/dates";
+import { recommendedAction, riskLegend, siteSummaryInterpretation } from "../lib/interpretation";
+import { getStationMetadata } from "../lib/stations";
+import type { RiskLabel, SiteSummary } from "../lib/types";
 
-async function getSites(): Promise<WaterSite[]> {
-  const res = await fetch("http://localhost:3000/api/sites", {
-    cache: "no-store",
-  });
+async function getSites(): Promise<SiteSummary[]> {
+  const res = await fetch(getAppUrl("/api/sites"), { cache: "no-store" });
 
   if (!res.ok) throw new Error("Failed to load sites");
-  const data = await res.json();
-  return data.sites as WaterSite[];
+  return (await res.json()) as SiteSummary[];
 }
 
-function statusPill(status: WaterSite["status"]) {
+function statusPill(status: RiskLabel) {
   const base =
     "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium";
   if (status === "Safe") return `${base} border-green-300`;
@@ -27,20 +22,83 @@ function statusPill(status: WaterSite["status"]) {
 }
 
 export default async function DashboardPage() {
-  const sites = await getSites();
+  let sites: SiteSummary[] = [];
+  let errorMessage: string | null = null;
+
+  try {
+    sites = await getSites();
+  } catch (error) {
+    errorMessage =
+      error instanceof Error ? error.message : "Failed to load dashboard data";
+  }
 
   return (
-    <main style={{ padding: 24, maxWidth: 900, margin: "0 auto" }}>
+    <main style={{ padding: 24, maxWidth: 960, margin: "0 auto" }}>
       <h1 style={{ fontSize: 28, fontWeight: 700 }}>Water Intel Dashboard</h1>
-      <p style={{ marginTop: 8, opacity: 0.8 }}>
-        Temporary data (mock). Click a site to view readings.
-      </p>
+      <div
+        style={{
+          marginTop: 12,
+          padding: "12px 14px",
+          borderRadius: 12,
+          background: "#ecfeff",
+          border: "1px solid #a5f3fc",
+          color: "#155e75",
+        }}
+      >
+        Historical Analysis using public PWQMN data (2019–2024) · Real-time
+        monitoring requires Phase 2 SCADA or community sensor access
+      </div>
+
+      <div
+        style={{
+          marginTop: 12,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gap: 10,
+        }}
+      >
+        {(["Safe", "Watch", "Concern"] as RiskLabel[]).map((label) => (
+          <div
+            key={label}
+            style={{
+              border: "1px solid #e5e5e5",
+              borderRadius: 12,
+              padding: 12,
+              background: "#fff",
+              color: "#111111",
+            }}
+          >
+            <div className={statusPill(label)}>{label}</div>
+            <div style={{ marginTop: 8, fontSize: 13, color: "#111111" }}>
+              {riskLegend(label)}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {errorMessage ? (
+        <div
+          style={{
+            marginTop: 18,
+            padding: 14,
+            borderRadius: 12,
+            border: "1px solid #fecaca",
+            background: "#fef2f2",
+            color: "#991b1b",
+          }}
+        >
+          {errorMessage}
+        </div>
+      ) : null}
 
       <div style={{ marginTop: 20, display: "grid", gap: 12 }}>
         {sites.map((site) => (
+          (() => {
+            const metadata = getStationMetadata(site.station_id);
+            return (
           <Link
-            key={site.id}
-            href={`/dashboard/sites/${site.id}`}
+            key={site.station_id}
+            href={`/dashboard/sites/${site.station_id}`}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -53,15 +111,30 @@ export default async function DashboardPage() {
             }}
           >
             <div>
-              <div style={{ fontWeight: 650 }}>{site.name}</div>
+              <div style={{ fontWeight: 650 }}>{metadata.name}</div>
               <div style={{ fontSize: 13, opacity: 0.75, marginTop: 4 }}>
-                {site.region} • Last updated{" "}
-                {new Date(site.lastUpdated).toLocaleString()}
+                {metadata.location}
+              </div>
+              <div style={{ fontSize: 13, opacity: 0.75, marginTop: 4 }}>
+                Station {site.station_id} • Risk score {site.risk_score} • Last updated{" "}
+                {formatDisplayDate(site.last_reading_date)}
+              </div>
+              <div style={{ fontSize: 13, opacity: 0.75, marginTop: 4 }}>
+                {site.anomaly_count} anomalies • Top parameter{" "}
+                {site.top_anomaly_parameter ?? "Unavailable"}
+              </div>
+              <div style={{ fontSize: 13, color: "#111111", marginTop: 6 }}>
+                {siteSummaryInterpretation(site)}
+              </div>
+              <div style={{ fontSize: 13, color: "#111111", marginTop: 4 }}>
+                Recommended action: {recommendedAction(site)}
               </div>
             </div>
 
-            <div className={statusPill(site.status)}>{site.status}</div>
+            <div className={statusPill(site.risk_label)}>{site.risk_label}</div>
           </Link>
+            );
+          })()
         ))}
       </div>
     </main>

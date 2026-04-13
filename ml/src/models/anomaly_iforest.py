@@ -25,7 +25,7 @@ ML_ROOT = PROJECT_ROOT / "ml"
 sys.path.insert(0, str(ML_ROOT))
 
 # Defaults
-DEFAULT_INPUT = PROJECT_ROOT / "data" / "processed" / "eccc_features.csv"
+DEFAULT_INPUT = PROJECT_ROOT / "data" / "processed" / "grand_river_features.csv"
 DEFAULT_OUTPUT = PROJECT_ROOT / "outputs" / "anomalies.csv"
 
 # Feature columns used by the model (all engineered features from Day 7)

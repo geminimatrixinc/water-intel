@@ -26,7 +26,7 @@ ML_ROOT = PROJECT_ROOT / "ml"
 sys.path.insert(0, str(ML_ROOT))
 
 # Defaults
-DEFAULT_FEATURES = PROJECT_ROOT / "data" / "processed" / "eccc_features.csv"
+DEFAULT_FEATURES = PROJECT_ROOT / "data" / "processed" / "grand_river_features.csv"
 DEFAULT_ANOMALIES = PROJECT_ROOT / "outputs" / "anomalies.csv"
 
 # Same feature columns used by the Isolation Forest

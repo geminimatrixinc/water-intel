@@ -94,10 +94,16 @@ Each day ends with:
 - **Day 5:** Raw → Processed pipeline (`build_processed.py`) — clean, deduplicated, ISO-8601
 - **Day 7:** Feature engineering (`build_features.py`) — rolling stats, z-scores, gap flags
 - **Day 7.5:** Ontario PWQMN data sourcing — switched to Grand River watershed data (8 stations near Six Nations, 13,194 rows, 103 params, 2019–2024)
+- **Day 8:** Isolation Forest anomaly model — `outputs/anomalies.csv` generated with stable anomaly scores
+- **Day 9:** Driver hints — anomaly outputs enriched with top contributing features
+- **Day 10:** Site summary report — `outputs/site_summary.csv` generated per station
+- **Day 11:** Risk scoring — 0–100 risk score + Safe/Watch/Concern labels added to site summaries
+- **Day 12:** FastAPI backend — CSV-backed API endpoints implemented and verified locally with CORS
+- **Day 13:** Dashboard wiring — Next.js dashboard now renders live site summaries, risk details, anomaly table, and anomaly timeline from FastAPI
 - **Planning:** Task breakdown created in `workplan/tasks/`, PROGRESS.md started, architecture documented, pilot targets + AI outreach playbook
 
 ### Current focus ▶
-- **Day 8:** Anomaly detection (Isolation Forest) on Grand River features
+- **Day 14:** Demo pack + pilot-ready artifacts built around the live dashboard flow
 
 ### Task Files
 Detailed acceptance criteria for each day: `workplan/tasks/`
@@ -349,6 +355,178 @@ We are "Week 4 done" when all are true:
 - [ ] Clear Phase 2 plan exists (pilot + calibration + governance)
 - [ ] Guardrails are explicit (2A proxy, not 2B advisory prediction)
 - [ ] At least 1 funding application in progress
+
+---
+
+# Week 5 — MCP Agent Architecture (Build)
+
+> Goal: Transform Water-Intel from a dashboard into an **intelligent agent** that other AI systems can query.  
+> This is the technical moat and the showstopper demo for funding conversations.
+
+### Day 20 — MCP Server: Expose Water-Intel as agent tools
+**Deliverable**
+- `mcp/water_intel_server.py` — MCP server wrapping existing API logic
+- Tools: `get_risk_score`, `get_anomalies`, `get_site_summary`, `get_site_list`, `get_parameter_trend`
+- Resources: `water://sites`, `water://data-dictionary`
+- Testable from Claude Desktop or VS Code Copilot
+
+**Commit:** `feat: mcp server — expose water-intel tools for agent integration`
+
+### Day 21 — MCP Client: Consume external data agents
+**Deliverable**
+- `mcp/clients/weather_client.py` — weather data adapter
+- `mcp/clients/water_level_client.py` — hydrometric data adapter
+- `mcp/clients/advisory_client.py` — advisory status adapter
+- `mcp/demo_external_server.py` — simulated external MCP server for demo
+- Optional: weather correlation in risk scoring
+
+**Commit:** `feat: mcp clients — weather, water level, advisory data agents`
+
+### Day 22 — Autonomous Water-Intel Agent (LLM + MCP orchestration)
+**Deliverable**
+- `mcp/agent/water_agent.py` — LLM agent that reasons across MCP sources
+- `mcp/agent/briefing_generator.py` — automated daily water briefings
+- Agent answers: "What's happening on the Grand River today?"
+- Generates operator-friendly briefings with recommendations
+
+**Commit:** `feat: autonomous water-intel agent with LLM reasoning + daily briefings`
+
+### Day 23 — Agent demo pack + federated architecture design
+**Deliverable**
+- `docs/agent_demo_script.md` — 90-second agent demo
+- `docs/FEDERATED_AGENT_DESIGN.md` — community agent mesh architecture + OCAP® alignment
+- Updated business plan + funding strategy with Phase 3 agent vision
+- Screenshots in `docs/screens/`
+
+**Commit:** `docs: mcp agent demo pack + federated architecture design`
+
+---
+
+# Exit Criteria (Full — including Week 5)
+
+We are "fully demo-ready" when all are true:
+- [ ] 90-second dashboard demo works without explaining ML
+- [ ] 90-second agent demo shows multi-source reasoning
+- [ ] Dashboard shows real anomaly/risk output
+- [ ] MCP server queryable by external AI agents
+- [ ] Water-Intel agent generates daily briefings
+- [ ] Company website live with Water-Intel product page
+- [ ] Federated agent architecture documented for Phase 3D
+- [ ] Business plan + funding strategy include agent platform vision
+- [ ] Guardrails are explicit (2A proxy, not 2B advisory prediction)
+- [ ] At least 1 funding application in progress
+
+---
+
+# Phase 3 — MCP Agent Architecture (Vision)
+
+> **Concept:** Build Water-Intel as an autonomous AI agent that exposes its intelligence via the **Model Context Protocol (MCP)** — enabling other agents, platforms, and tools to query water safety data in real time through a standardized protocol.
+
+## What is MCP?
+The **Model Context Protocol** is an open standard (originated by Anthropic, adopted by OpenAI, Google, and others) that lets AI agents expose tools, resources, and data to other AI systems. Think of it as an API — but designed for agent-to-agent communication rather than human-to-machine.
+
+## The Vision: Water-Intel as an MCP Server
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    WATER-INTEL MCP SERVER                            │
+│                                                                     │
+│  Tools exposed via MCP:                                             │
+│    get_risk_score(site_id)        → current risk 0-100 + label      │
+│    get_anomalies(site_id, days)   → recent anomalies + drivers      │
+│    get_site_summary(region)       → all sites with status           │
+│    get_water_advisory_status()    → active advisories in coverage   │
+│    get_upstream_alert(site_id)    → "what's coming" early warning   │
+│    get_parameter_trend(site, param, window) → time-series trend     │
+│                                                                     │
+│  Resources exposed via MCP:                                         │
+│    water://sites                  → list of monitored stations      │
+│    water://advisories             → current advisory map            │
+│    water://data-dictionary        → parameter definitions + units   │
+│                                                                     │
+└──────────────────────┬──────────────────────────────────────────────┘
+                       │ MCP protocol (JSON-RPC over stdio/SSE)
+         ┌─────────────┼─────────────────────────────┐
+         │             │                             │
+         ▼             ▼                             ▼
+┌─────────────┐ ┌──────────────┐ ┌───────────────────────────┐
+│ Community    │ │ Government   │ │ Other AI Agents            │
+│ Health Agent │ │ Policy Agent │ │ (weather, infrastructure,  │
+│              │ │              │ │  public health, emergency) │
+│ "Is the     │ │ "Which       │ │                            │
+│ water safe  │ │ communities  │ │ "Cross-reference water     │
+│ at Site X?" │ │ need urgent  │ │ risk with weather forecast │
+│              │ │ funding?"    │ │ and infrastructure age"    │
+└─────────────┘ └──────────────┘ └───────────────────────────┘
+```
+
+## Water-Intel Also Consumes Other MCP Servers
+
+```
+Water-Intel Agent (MCP Client)
+    │
+    ├── → Environment Canada Weather MCP → real-time precip, temp, flood alerts
+    ├── → ECCC Water Level MCP           → hydrometric station discharge data
+    ├── → ISC Advisory Registry MCP      → live advisory status per community
+    ├── → Provincial Sensor Networks MCP → SCADA / IoT sensor feeds
+    ├── → Emergency Management MCP       → wildfires, floods, spills upstream
+    └── → Infrastructure DB MCP          → plant age, capacity, last inspection
+```
+
+**The result:** Water-Intel becomes a node in a **mesh of specialized agents** that can cross-reference environmental, infrastructure, and health data in real time — far beyond what any single data source provides.
+
+## Use Cases
+
+| Scenario | Agent Interaction |
+|----------|------------------|
+| **Operator morning check** | Community health agent asks Water-Intel MCP for overnight risk changes |
+| **Flood response** | Emergency agent detects flood warning → queries Water-Intel for downstream site risk |
+| **Funding prioritization** | Government policy agent queries Water-Intel for communities with chronic high-risk scores |
+| **Wildfire smoke impact** | Weather agent detects smoke event → Water-Intel correlates with turbidity/pH spikes |
+| **Cross-community alerting** | Water-Intel detects upstream anomaly → notifies downstream community agents |
+| **Grant reporting** | Funding agent pulls Water-Intel trend data to auto-generate impact reports |
+
+## Implementation Roadmap
+
+### Phase 3A — Water-Intel MCP Server (expose our data)
+- Wrap existing FastAPI endpoints as MCP tools
+- Define MCP resource URIs for sites, advisories, data dictionary
+- Implement stdio transport (for local agent integration) + SSE transport (for remote)
+- Auth layer: API keys for agent-to-agent, OCAP®-compliant data scoping per community
+
+### Phase 3B — Water-Intel MCP Client (consume other agents)
+- Build MCP client adapters for Environment Canada weather + water level data
+- Integrate real-time hydrometric data into risk scoring
+- Weather-correlated anomaly detection (rain events → turbidity lag prediction)
+
+### Phase 3C — Autonomous Water-Intel Agent
+- LLM-powered reasoning layer that orchestrates across multiple MCP sources
+- Natural language interface: "What's the water situation on the Grand River today?"
+- Automated daily briefings generated by the agent, pushed to operators
+- Proactive alerting: agent detects converging risk factors across sources without being asked
+
+### Phase 3D — Agent Mesh / Federation
+- Multiple community Water-Intel agents sharing upstream/downstream intelligence
+- Federated model: each community owns their agent + data, shares only what they consent to
+- National intelligence layer aggregates anonymized risk patterns for policy & advocacy
+
+## Technical Stack (Phase 3)
+
+| Component | Technology | Notes |
+|-----------|-----------|-------|
+| MCP Server | Python `mcp` SDK | Wraps existing pipeline |
+| MCP Client | Python `mcp` SDK | Connects to external data agents |
+| Agent Reasoning | LLM (Claude / GPT) with tool use | Orchestrates MCP tool calls |
+| Transport | stdio (local) + SSE (remote) | Standard MCP transports |
+| Auth | OAuth 2.0 + OCAP® scoping | Community-consented data access |
+| Deployment | Docker + edge (community-local option) | Data sovereignty: agent runs on-prem if needed |
+
+## Data Sovereignty Alignment
+MCP is uniquely suited for Indigenous data governance:
+- **Each community runs their own agent** — data never leaves their infrastructure unless they choose to share
+- **Tool-level permissions** — a community can expose `get_risk_score` while keeping raw data private
+- **Federated, not centralized** — no single entity controls the network
+- **Consent-based sharing** — agents only respond to queries from authorized peers
 
 ---
 

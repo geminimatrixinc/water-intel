@@ -22,7 +22,7 @@ sys.path.insert(0, str(ML_ROOT))
 
 # Defaults
 DEFAULT_ANOMALIES = PROJECT_ROOT / "outputs" / "anomalies.csv"
-DEFAULT_FEATURES = PROJECT_ROOT / "data" / "processed" / "eccc_features.csv"
+DEFAULT_FEATURES = PROJECT_ROOT / "data" / "processed" / "grand_river_features.csv"
 DEFAULT_OUTPUT = PROJECT_ROOT / "outputs" / "site_summary.csv"
 
 

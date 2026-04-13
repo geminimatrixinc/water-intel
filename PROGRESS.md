@@ -4,6 +4,40 @@
 
 ---
 
+### 2026-04-12 — Data Refresh + Demo Guardrail Copy
+- ✅ Done: checked the Ontario PWQMN catalogue and confirmed there is still no published 2025 measurement file
+- ✅ Done: refreshed the raw Ontario source files (`pwqmn_2019_2021.csv`, `pwqmn_2021_2022.csv`, `pwqmn_2023.csv`, `pwqmn_2024.csv`, `pwqmn_coordinates.csv`) from the latest published dataset resources
+- ✅ Done: rebuilt `grand_river_processed.csv`, `grand_river_features.csv`, `outputs/anomalies.csv`, and `outputs/site_summary.csv` from the refreshed raw files
+- ✅ Done: updated dashboard banner copy to explicitly state that the app uses public historical PWQMN data and that real-time monitoring requires Phase 2 data access
+- ✅ Verified: refreshed Grand River coverage now reaches as late as Dec 10, 2024 for some stations; localhost renders the updated disclaimer copy
+- 🧠 Learned: the right demo posture is not "almost real-time" but "historical proof of the intelligence layer pending operational data access"
+- 🔥 Next: finish Day 14 packaging artifacts — `docs/demo_script.md`, `docs/PILOT_ONE_PAGER.md`, and current screenshots
+
+### 2026-04-12 — Day 14: Dashboard Clarity Pass
+- ✅ Done: added plain-language interpretation helpers in `web/app/app/lib/interpretation.ts` for risk legend text, recommended actions, site summaries, and humanized driver hints
+- ✅ Done: updated the dashboard and site detail pages to explain what Safe/Watch/Concern mean and what operators should do next
+- ✅ Done: added a timeline caption and replaced raw model-feature labels with readable anomaly driver language
+- ✅ Verified: localhost dashboard and site detail pages render the new explanation text after restarting the Next.js dev server
+- 🧠 Learned: the main usability gap was not the model output itself but the lack of narrative framing around risk and operator action
+- 🔥 Next: finish Day 14 demo artifacts — demo script, pilot one-pager, and screenshots
+
+### 2026-04-12 — Day 13: Dashboard Wiring
+- ✅ Done: wired `web/app/` to the real FastAPI backend via Next.js proxy routes instead of mock API responses
+- ✅ Done: added real TypeScript contracts in `web/app/app/lib/types.ts` and backend URL helpers in `web/app/app/lib/api.ts`
+- ✅ Done: replaced mock readings UI with a real risk card, anomaly history table, and persistent historical-analysis banner
+- ✅ Done: added anomaly timeline chart using `recharts` and loading states for dashboard routes
+- ✅ Verified: `/dashboard` and `/dashboard/sites/BC08NL0005` render live data from FastAPI; invalid site routes return 404
+- 🧠 Learned: the frontend should align to the anomaly-driven data model (`station_id`, `risk_label`, anomaly rows) rather than force the backend to imitate old turbidity/pH/chlorine mocks
+- 🔥 Next: Day 14 — demo pack and pilot-ready one-pager built around the live dashboard flow
+
+### 2026-04-12 — Day 12: FastAPI Backend
+- ✅ Done: `api/main.py` — FastAPI app serving CSV-backed endpoints for health, sites, site detail, anomalies, and risk
+- ✅ Done: `api/requirements.txt` — minimal API dependencies (`fastapi`, `uvicorn`, `pandas`)
+- ✅ Verified: local server starts with `uvicorn api.main:app --reload`; `/health`, `/sites`, `/sites/{site_id}`, `/anomalies`, and `/risk/{site_id}` return valid JSON
+- ✅ Verified: CORS allows `http://localhost:3000`; missing `site_id` returns 404
+- 🧠 Learned: API should treat `station_id` as the canonical identifier and return real anomaly rows rather than mimic the old mock turbidity/ph/chlorine shape
+- 🔥 Next: Day 13 — wire the dashboard to the real backend and replace mock route assumptions
+
 ### 2026-03-24 — Day 11: Risk Score v1 (0–100)
 - ✅ Done: `ml/src/models/risk_score.py` — composite 0–100 risk score + Safe/Watch/Concern labels
 - ✅ Output: `outputs/site_summary.csv` enriched with `risk_score` + `risk_label` (now 14 columns)
