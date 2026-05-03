@@ -33,11 +33,17 @@ Source: Turtle Island News, Feb 11, 2026 — "Federal action on water and wastew
 | **Ask for** | The Water/Wastewater Manager or Supervisor |
 | **Contact page** | https://www.sixnations.ca/contact-us/ |
 
-**Approach:** Walk-in or phone call — you're local. Reference the Jan. 27 Council resolution.
+**Approach:** Start with Mike Montour on LinkedIn once Day 14 materials are ready. If no response, follow with walk-in or phone call — you're local. Reference the Jan. 27 Council resolution and the broader need for better water data.
 
-**Key pitch reframe:** Don't say "we replace your SCADA." Say: *"Your SCADA watches the water inside your plant. We watch the river upstream — so you know what's coming before it arrives."*
+**First outreach action (save this for when ready):**
+- Send Mike Montour a short LinkedIn note before broader outreach.
+- Goal: ask for honest feedback, not sell software.
+- Offer either a 15-minute conversation or a short demo link.
 
-"Hi, I'm Mike, I'm Mohawk and I have an office here on Six Nations. I saw Council's resolution about water infrastructure funding. I built something I think could help — a water quality early warning system. Right now your plant sensors watch the water at the intake. My tool watches the river *upstream* — Big Creek, the Grand River at Brantford, Dunnville, Caledonia — 8 stations around your territory. It uses machine learning on **5 years of provincial data** to flag anomalies and show risk patterns before they reach the plant. I'd love to show it to whoever manages your water systems — it's a 90-second demo on your actual watershed data, and it could support what Council is already pushing for."
+**LinkedIn message draft:**
+"Hi Mike, I’m Mike, Mohawk, and I have an office on Six Nations. I’ve been building a prototype called Water-Intel using historical Grand River watershed data around Six Nations to explore whether upstream source-water patterns can be interpreted in a more useful way. It’s still early-stage, and I see it as a real-world AI/ML project rather than a finished product, but I built it because the problem feels real and worth working on. I saw your comments about infrastructure pressure, operator strain, and the need for better data, and it made me think this may be relevant. It’s not meant to replace plant SCADA, and it’s not using Six Nations operational data, but it may help show how upstream signals and clearer risk interpretation could support planning and decision-making. I’d genuinely value your honest feedback on whether this kind of tool would ever be useful in your world. If you’re open to it, I’d appreciate 15 minutes, or I can send a short demo link first."
+
+**Key pitch reframe:** Don't say "we replace your SCADA." Say: *"Your SCADA watches the water inside the plant. This looks upstream, so source-water changes are easier to interpret before they become operational pressure."*
 
 **AI prompt to draft email/call script:**
 ```
@@ -98,6 +104,77 @@ I want to ask if they'd be interested in seeing a water quality early-warning to
 I built. I'm Mohawk with an office on Six Nations. Draft a brief, warm phone script.
 Same context as before — Water-Intel tool, anomaly detection, risk scores, not selling.
 ```
+
+---
+
+## Additional / Situational Outreach Channels
+
+These are relevant, but they are not the first move. Keep the sequence tight:
+1. Mike Montour / Public Works for technical relevance.
+2. Leadership or administration only if redirected or if Public Works does not respond.
+3. OFNTSC / ISC / Ontario support channels for funding and technical support.
+4. SNGRDC only if the conversation turns toward commercialization, recurring revenue, or a formal partnership structure.
+
+### Additional Channel — Six Nations of the Grand River Development Corporation (SNGRDC)
+
+**When relevant:** Only when Water-Intel is being discussed as a commercial deployment, long-term venture, or community investment partnership. This is not the first technical-validation contact.
+
+| Detail | Info |
+|--------|------|
+| **Organization** | Six Nations of the Grand River Development Corporation |
+| **Phone** | (519) 753-1950 |
+| **Email** | info@sndevcorp.ca |
+| **Potential contact to verify** | Phillip Johnson, Vice President of Business Development |
+| **Use case** | Commercial partnership, investment angle, sustainable technology alignment |
+
+**Why it matters:** Relevant later if Water-Intel moves from prototype validation into deployment, commercialization, or a partnership structure that could create recurring value for the community.
+
+### Additional Channel — Chief of Staff / Council Administrative Route
+
+**When relevant:** Use only if you need a high-level administrative route into Elected Council or if Public Works tells you to go through leadership channels.
+
+| Detail | Info |
+|--------|------|
+| **Potential contact to verify** | Linda Parker, Chief of Staff |
+| **Use case** | High-level administrative inquiry, routing to the correct Council or leadership office |
+
+**Why it matters:** Useful as a redirect path, but not the strongest first contact for technical feedback.
+
+### Additional Channel — Ontario First Nations Technical Services Corporation (OFNTSC)
+
+**When relevant:** Strong for technical advisory support, engineering context, and funding-navigation conversations tied to First Nations infrastructure.
+
+| Detail | Info |
+|--------|------|
+| **Organization** | Ontario First Nations Technical Services Corporation |
+| **Website** | https://www.ofntsc.org/ |
+| **Ask for** | Water and Wastewater Services / Engineering support |
+| **Use case** | Technical advisory, infrastructure/funding pathways, validation context |
+
+**Why it matters:** This is one of the more important secondary channels because they sit close to the technical and funding reality of First Nations infrastructure.
+
+### Additional Channel — Indigenous Drinking Water Projects Office (Ontario)
+
+**When relevant:** Provincial engineering, technical, and project-support conversations related to on-reserve drinking water systems in Ontario.
+
+| Detail | Info |
+|--------|------|
+| **Organization** | Indigenous Drinking Water Projects Office |
+| **Use case** | Technical/engineering support pathway, Ontario project guidance |
+
+**Why it matters:** Relevant for future Phase 2 conversations or if you need to understand how projects like this could align with Ontario support structures.
+
+### Additional Channel — Ohneganos (Indigenous-led Water Research)
+
+**When relevant:** Best for research alignment, local water-data context, Indigenous-led monitoring perspectives, and community-grounded technical feedback.
+
+| Detail | Info |
+|--------|------|
+| **Organization** | Ohneganos |
+| **Email** | ohneganos@gmail.com |
+| **Use case** | Data/research help, local monitoring context, Indigenous-led water knowledge |
+
+**Why it matters:** Strong secondary contact if the discussion becomes more research-heavy, data-sovereignty-focused, or community-monitoring-focused rather than immediate operational validation.
 
 ---
 
@@ -223,6 +300,36 @@ Please suggest how to search their faculty directory and what to look for.
 Then help me draft a short email introducing my project and asking if they'd
 be interested in a collaboration.
 ```
+
+---
+
+## Personal Network + Event Tracking (Reference)
+
+### Relationship Note — Drew Denton (Personal Warm Network)
+
+**Who:** Drew Denton (brother)  
+**Reference links:**
+- https://forwardsummit.ca/drew-denton/
+- https://indigenouscleanenergy.com/team/drew/
+
+**Why this matters:** This is a warm relationship with deep network access through his company and role. Use this as an introductions path while traction is still early.
+
+**How to use this relationship (simple):**
+1. Ask for 2-3 targeted introductions (not broad intros).
+2. Ask which event attendees are most relevant for pilots, support letters, or funder alignment.
+3. Follow up quickly after each intro with a short demo link and one clear ask.
+
+### Event Note — Forward Summit East 2026
+
+**Event link:** https://forwardsummit.ca/fs-east-2026/
+
+**Recommendation:** **Attend if at all feasible.** At this stage, network traction is likely more valuable than adding more product polish.
+
+**Reason:** You already have a working prototype; the bigger bottleneck is access to people, partnerships, and decision pathways.
+
+**Minimum event objective:** Leave with at least 3 concrete follow-ups (intro call, feedback call, or support-letter discussion).
+
+**Status:** Tracked on 2026-04-24.
 
 ---
 

@@ -8,7 +8,7 @@
 ---
 
 ## Objective
-Activate the dormant HostSigner account, deploy both the company website and (optionally) the Water-Intel dashboard, configure domains, and ensure production readiness.
+Activate the dormant HostSigner account, deploy both the company website and (optionally) the Water-Intel dashboard, configure domains, and ensure production readiness. Use the hosted product page as the public credibility surface for Water-Intel: dashboard proof, screenshots, and an Ask Water-Intel guided narrative that distinguishes the product from an ordinary chart monitor.
 
 ## Deliverables
 
@@ -24,6 +24,12 @@ Activate the dormant HostSigner account, deploy both the company website and (op
 - [ ] SSL certificate enabled
 - [ ] Verify all pages load correctly in production
 
+### Water-Intel Product Experience
+- [ ] Publish a Water-Intel product page that explains the difference between charting and interpretation
+- [ ] Add an Ask Water-Intel section with guided prompts or a mock conversational demo
+- [ ] Keep the 2A proxy / no advisory-prediction guardrail visible on the public page
+- [ ] Make it clear what exists now (dashboard) versus what is coming next (MCP-backed conversational layer)
+
 ### Water-Intel Dashboard (stretch)
 - [ ] Deploy dashboard app as subdomain or path (`app.geminimatrix.ca` or `/water-intel`)
 - [ ] Configure FastAPI backend as API service
@@ -38,6 +44,7 @@ Activate the dormant HostSigner account, deploy both the company website and (op
 - [ ] Company website live at production URL
 - [ ] HTTPS working
 - [ ] No broken links or missing assets
+- [ ] Public Water-Intel page makes the product feel distinct from a chart dashboard within the first screenful
 - [ ] Page load time < 3 seconds
 
 ## Commit Message

@@ -123,11 +123,11 @@ Water-Intel provides the intelligence layer that doesn't exist today:
 
 ### Immediate Targets
 1. **ISC First Nations Infrastructure Fund** — Water and wastewater category
-2. **CIRNAC Northern/Indigenous Innovation** — Technology projects
-3. **FNHA (First Nations Health Authority)** — Health-tech grants (BC-specific)
+2. **Innovation Stream — First Nations Water** — New approaches to water safety
+3. **EcoAction Freshwater Stream** — Watershed, freshwater, and monitoring-aligned support
 4. **Mitacs** — Industry-academic research partnerships
-5. **ISED Innovation Canada** — Indigenous entrepreneurship stream
-6. **NACCA / Indigenous business development** — Business growth funding
+5. **NACCA / Indigenous business development** — Founder and business growth funding
+6. **Canada Water Agency opportunities** — Track closely for freshwater-aligned future funding or partnerships
 
 ### What Funding Enables
 | Amount | What It Unlocks |
@@ -139,8 +139,9 @@ Water-Intel provides the intelligence layer that doesn't exist today:
 
 ### Grant Positioning
 - **Indigenous-owned** company building technology for Indigenous communities
-- **Water safety** is a top federal priority with dedicated funding streams
+- **Water safety and freshwater resilience** are stronger funding frames than generic AI innovation
 - **Data sovereignty** aligned (OCAP® principles, community consent model)
+- **Source-water interpretation** complements plant systems rather than replacing SCADA
 - **Measurable outcomes:** advisory days prevented, response time improved, operator confidence
 
 ---
@@ -196,6 +197,12 @@ Most water plants operate at one of three levels:
 | **Pilot Deploy** | Months 6–9 | 1–2 community pilots with real data |
 | **Evaluation** | Months 9–12 | Pilot results documented, scale plan |
 | **Phase 3 Scale** | Year 2+ | Multi-community, national platform |
+
+### Key Events
+
+| Event | Timing | Why It Matters |
+|-------|--------|----------------|
+| **First Nations Investment Forum (Toronto)** | November 29-December 1, 2026 | Strategic venue to meet Indigenous leaders, capital providers, industry, and government partners; target event for partnership development, investor conversations, and Water-Intel visibility |
 
 ---
 

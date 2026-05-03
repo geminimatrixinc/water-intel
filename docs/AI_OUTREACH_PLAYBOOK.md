@@ -50,6 +50,37 @@ they're not the right contact.
 
 ---
 
+## Step 1.5: First LinkedIn Message
+
+When the first contact should be lighter and more personal, use LinkedIn before email. Paste this into AI:
+
+```
+I need help writing a short LinkedIn message.
+
+WHO I AM: Mike, Indigenous owner of Gemini Matrix Consulting. I'm early-stage, founder-led, and I'm building this project myself.
+
+WHAT I BUILT: Water-Intel, an early-stage prototype that uses historical Grand River watershed data to explore whether upstream source-water patterns can be interpreted more clearly. It is a real-world AI/ML project, not a finished product.
+
+WHAT I WANT: Honest feedback first. I am not trying to sell software in this message.
+
+WHO I'M CONTACTING: [describe the person and why they matter]
+
+WHAT I WANT THE MESSAGE TO DO:
+- Sound human and local
+- Mention why I thought of them specifically
+- Make clear this does not replace plant SCADA or existing operational systems
+- Ask for 15 minutes or offer a short demo link
+- Stay under 120 words
+- Avoid sounding corporate, salesy, or overconfident
+```
+
+### Tips
+- Lead with relevance to their world, not with AI terminology
+- Keep the first note light enough that it feels easy to answer
+- If the draft sounds like a pitch, ask AI to make it feel more like a request for honest feedback
+
+---
+
 ## Step 2: Handling Replies
 
 When someone replies to your email, paste this into AI:

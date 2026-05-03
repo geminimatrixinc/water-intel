@@ -4,6 +4,13 @@
 
 ---
 
+### 2026-04-15 — Dashboard/Detail Checkpoint + Focus Shift
+- ✅ Done: treated the dashboard summary and site detail views as phase-complete for the current MVP pass
+- ✅ Done: updated roadmap and Week 4 planning so the next emphasis is product packaging, company website, Ask Water-Intel positioning, and the technical/pilot brief
+- ✅ Done: clarified the product posture as a complementary source-water intelligence suite rather than a competitor to monitoring portals or plant SCADA
+- 🧠 Learned: additional dashboard/detail polish is now in diminishing-returns territory unless a real bug or credibility issue appears during packaging
+- 🔥 Next: finish Day 14 packaging artifacts, then move directly into Day 16 website work, the brief, and the guided Ask Water-Intel experience
+
 ### 2026-04-12 — Data Refresh + Demo Guardrail Copy
 - ✅ Done: checked the Ontario PWQMN catalogue and confirmed there is still no published 2025 measurement file
 - ✅ Done: refreshed the raw Ontario source files (`pwqmn_2019_2021.csv`, `pwqmn_2021_2022.csv`, `pwqmn_2023.csv`, `pwqmn_2024.csv`, `pwqmn_coordinates.csv`) from the latest published dataset resources

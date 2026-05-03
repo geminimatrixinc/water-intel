@@ -114,6 +114,25 @@ Phase 2 adds:
   - CI/CD + Docker deployment
 ```
 
+## Phase 2.5 Architecture — API to MCP Transition
+
+Phase 1 already produces the structured outputs the future agent layer needs: site summaries,
+risk scores, anomalies, and driver hints. The next architectural step is not a pivot away from
+the dashboard; it is an additional access layer that exposes the same intelligence to AI agents.
+
+```
+HTTP dashboard/app layer        MCP agent layer
+-------------------------       -------------------------------
+GET /sites                  ->  get_site_summary()
+GET /sites/{id}             ->  get_risk_score(site_id)
+GET /anomalies?site_id=     ->  get_anomalies(site_id, days)
+Derived interpretation      ->  explain_station_risk(site_id)
+```
+
+This transition matters because it lets Water-Intel evolve from a visual dashboard into a
+queryable intelligence service without rewriting the ML pipeline or changing the Phase 1
+guardrails.
+
 ## Phase 3 Architecture — MCP Agent Mesh (Vision)
 
 ```
@@ -121,6 +140,7 @@ Phase 3 adds:
   - Water-Intel MCP Server: expose risk scores, anomalies, site data as MCP tools
   - Water-Intel MCP Client: consume weather, water level, advisory, emergency data from other agents
   - LLM-powered reasoning agent: orchestrates multi-source queries, generates briefings
+  - Conversational operator surface: Ask Water-Intel chat and briefing interface grounded in MCP tools
   - Federated agent mesh: community-owned agents share upstream/downstream intel
   - OCAP®-aligned data scoping: tool-level permissions, consent-based sharing
   - Edge deployment option: agents run on-prem for full data sovereignty
@@ -142,6 +162,21 @@ Phase 3 adds:
 ```
 
 See [Roadmap — Phase 3](../workplan/Roadmap.md) for full implementation details.
+
+### Ask Water-Intel as the Operator Surface
+
+Ask Water-Intel is the operator-facing surface of the MCP architecture, not a separate product.
+Instead of asking a user to inspect multiple charts and infer meaning, the system should answer
+plain-language questions such as:
+
+- Which upstream sites changed the most this week?
+- Why is this station flagged as Concern?
+- What parameter appears to be driving the current risk score?
+- Which sites deserve follow-up before the next briefing?
+
+Those answers must be grounded in Water-Intel tools and constrained by the same guardrails as the
+dashboard: Phase 1 remains historical 2A proxy analysis using public source-water data, not
+advisory prediction or live plant control.
 
 ### 6. Dual Data Loaders
 The pipeline supports two data sources through separate loaders that output the same normalized schema:

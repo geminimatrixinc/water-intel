@@ -1,7 +1,7 @@
 # Sprint Overview — Phase 1 MVP
 
 > Water-Intel | Gemini Matrix Consulting  
-> Updated: 2026-04-12
+> Updated: 2026-04-15
 
 ---
 
@@ -14,6 +14,12 @@
 | **3** | API + UI + Demo Pack | 12–14 | 🟡 In Progress |
 | **4** | Company Website + Traction + Funding | 15–19 | 🔲 Not Started |
 | **5** | MCP Agent Architecture | 20–23 | 🔲 Not Started |
+
+## Current Focus Reminder
+
+- The dashboard and detail views are good enough for this phase unless a real bug or credibility issue appears.
+- Additional UI polish now has diminishing returns compared with the remaining packaging and traction work.
+- Current priority order: Day 14 packaging, Day 16 company site, technical/pilot brief, guided Ask Water-Intel experience, then MCP build.
 
 ---
 
@@ -57,8 +63,8 @@ Day 5: build_processed.py
 | **9** | **Driver hints** | [day09](tasks/done/day09_driver_hints.md) | ✅ Done |
 | **10** | **Site summary report** | [day10](tasks/done/day10_site_summary.md) | ✅ Done |
 | **11** | **Risk score (0–100)** | [day11](tasks/done/day11_risk_score.md) | ✅ Done |
-| 12 | FastAPI backend | [day12](tasks/day12_fastapi.md) | ✅ Done |
-| 13 | Dashboard wiring | [day13](tasks/day13_dashboard.md) | ✅ Done |
+| 12 | FastAPI backend | [day12](tasks/done/day12_fastapi.md) | ✅ Done |
+| 13 | Dashboard wiring | [day13](tasks/done/day13_dashboard.md) | ✅ Done |
 | 14 | Demo pack + pilot one-pager | [day14](tasks/day14_demo_pack.md) | 🟡 |
 | 15 | Demo video + business doc review | [days15–19](tasks/days15-19_traction.md) | 🔲 |
 | 16 | Gemini Matrix company website | [day16](tasks/day16_company_website.md) | 🔲 |
@@ -82,6 +88,7 @@ Day 5: build_processed.py
 | Data freshness gap (not real-time) | Demo feels dated | Latest published PWQMN data now reaches Dec 2024; frame clearly as historical trend analysis until Phase 2 SCADA or community sensor access exists |
 | Dashboard can't connect to API | Demo broken | Test CORS early, have mock fallback |
 | Scope creep (adding features before demo works) | Never ships | Strict daily plan, scrum discipline, "ship then polish" |
+| Continuing to polish dashboard/detail after the product story is already clear enough | Slows traction work | Treat dashboard/detail as phase-complete and only reopen for bugs or credibility gaps discovered during packaging |
 | Company website delays MVP pipeline work | Demo not ready | Website is Week 4 (after pipeline); don't start early |
 | HostSigner deployment issues | No public presence | Have Vercel free tier as fallback |
 | MCP SDK breaking changes | Agent work blocked | Pin SDK version; MCP spec is stable as of 2026 |
@@ -106,3 +113,7 @@ Day 5: build_processed.py
 - [ ] Agent demo runs in 90 seconds alongside dashboard demo
 - [ ] Code committed with meaningful commit messages
 - [ ] PROGRESS.md up to date
+
+## Discipline Note
+
+When in doubt, choose forward motion over polish. At this point, the highest-return work is packaging, positioning, website credibility, and the next interaction layer, not more dashboard/detail refinement.

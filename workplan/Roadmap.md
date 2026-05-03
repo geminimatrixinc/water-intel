@@ -310,7 +310,7 @@ Detailed acceptance criteria for each day: `workplan/tasks/`
 # Week 4 (Traction Week) — Company Presence + Credibility + Funding
 
 > Goal: stop building new product features unless a partner requests it.
-> Focus: company website, HostSigner deployment, outreach, funding applications.
+> Focus: company website, HostSigner deployment, outreach, funding applications, and a public-facing story that makes it obvious Water-Intel is more than a chart portal.
 
 ### Day 15 — Record 90-second demo video + finalize business docs
 **Deliverable**
@@ -320,19 +320,26 @@ Detailed acceptance criteria for each day: `workplan/tasks/`
 ### Day 16 — Add product landing page on Gemini Matrix site
 **Deliverable**
 - Page content draft (copy) for: `/products/water-intelligence`
-- Includes: problem, what it does, screenshots, pilot CTA
+- Includes: problem, what it does, screenshots, pilot CTA, and an Ask Water-Intel teaser
+- Distinguishes Water-Intel from a chart dashboard by emphasizing interpretation, prioritization, and plain-language explanation
+- Includes 3–5 example operator questions such as "Why is this site flagged?" or "Which upstream sites changed the most?"
+- Includes a concise technical brief / pilot brief link for funders, technical reviewers, and serious partners who want the deeper rationale behind the product
 
-### Day 17 — Pilot outreach list (3–5 targets)
+### Day 17 — HostSigner deployment + public demo surface
+**Deliverable**
+- Deploy company website and Water-Intel product page to a public URL
+- Add a guided Ask Water-Intel section or mock conversational demo so a non-technical viewer can tell in under 30 seconds that the product is not just another monitoring portal
+- Ensure public copy keeps the 2A proxy / no advisory-prediction guardrail explicit
+
+### Day 18 — Pilot outreach list + soft outreach message
 **Deliverable**
 - `docs/pilot_targets.md` with:
   - org type
   - contact role (not names required yet)
   - what we’re asking for (30-min call, LOI)
-
-### Day 18 — Soft outreach message + send to 3 targets
-**Deliverable**
 - `docs/outreach_email.md` (template)
 - Send to 3 targets (track results in PROGRESS)
+- Outreach language positions the dashboard as proof of value and Ask Water-Intel as the future conversational layer
 
 ### Day 19 — Funding application skeleton
 **Deliverable**
@@ -350,7 +357,8 @@ We are "Week 4 done" when all are true:
 - [ ] 90-second demo works without explaining ML
 - [ ] Dashboard shows real anomaly/risk output
 - [ ] Company website live on HostSigner with custom domain
-- [ ] Water-Intel product page on company site with screenshots/demo
+- [ ] Water-Intel product page on company site with screenshots/demo and Ask Water-Intel positioning
+- [ ] Water-Intel technical brief or pilot brief is available from the product page
 - [ ] Mission statement and business plan finalized
 - [ ] Clear Phase 2 plan exists (pilot + calibration + governance)
 - [ ] Guardrails are explicit (2A proxy, not 2B advisory prediction)
@@ -360,7 +368,7 @@ We are "Week 4 done" when all are true:
 
 # Week 5 — MCP Agent Architecture (Build)
 
-> Goal: Transform Water-Intel from a dashboard into an **intelligent agent** that other AI systems can query.  
+> Goal: Transform Water-Intel from a dashboard into an **intelligent, queryable water-risk copilot** that other AI systems can query.  
 > This is the technical moat and the showstopper demo for funding conversations.
 
 ### Day 20 — MCP Server: Expose Water-Intel as agent tools
@@ -387,6 +395,7 @@ We are "Week 4 done" when all are true:
 - `mcp/agent/water_agent.py` — LLM agent that reasons across MCP sources
 - `mcp/agent/briefing_generator.py` — automated daily water briefings
 - Agent answers: "What's happening on the Grand River today?"
+- Minimal Ask Water-Intel conversational interface for guided operator-style Q&A
 - Generates operator-friendly briefings with recommendations
 
 **Commit:** `feat: autonomous water-intel agent with LLM reasoning + daily briefings`

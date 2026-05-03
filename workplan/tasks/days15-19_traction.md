@@ -9,7 +9,9 @@
 
 ## Philosophy
 > Stop building new features unless a partner requests them.  
-> Focus: company credibility, public presence, pilot conversations, funding readiness.
+> Focus: company credibility, public presence, pilot conversations, funding readiness, and a first-impression story that makes Water-Intel feel meaningfully different from an existing monitoring portal.
+
+**Discipline reminder:** the dashboard/detail build is good enough for this phase. Do not slip back into UI polishing unless a real bug or credibility issue blocks packaging or outreach.
 
 ---
 
@@ -24,7 +26,8 @@
 - [ ] Build full company website (Home, About, Services, Water-Intel, Contact, Funding)
 - [ ] Use Gemini Pro for copy generation and design polish
 - [ ] Indigenous-inspired design (earth tones, water imagery, community focus)
-- [ ] Water-Intel product page with screenshots and "Request a Pilot" CTA
+- [ ] Water-Intel product page with screenshots, "Request a Pilot" CTA, and Ask Water-Intel teaser copy
+- [ ] Add a short technical brief / pilot brief link so serious reviewers have a deeper credibility document
 
 ## Day 17 — HostSigner Deployment + Domain
 > **See dedicated task file:** [day17_hostsigner_deploy.md](day17_hostsigner_deploy.md)
@@ -32,14 +35,17 @@
 - [ ] Deploy company website to production
 - [ ] Configure custom domain + SSL
 - [ ] Optional: deploy Water-Intel dashboard as subdomain
+- [ ] Ensure the public-facing Water-Intel page distinguishes interpretation from charting in the first screenful
 
 ## Day 18 — Pilot Outreach + Grant Research
 - [ ] Identify 3–5 target organizations (tribal councils, ISC regional, health authorities, NGOs)
 - [ ] Document in `docs/pilot_targets.md`
 - [ ] Draft outreach email template: `docs/outreach_email.md`
+- [ ] First outreach: send LinkedIn message to Mike Montour (Six Nations Public Works) asking for honest feedback or offering a short demo link
 - [ ] Send to 3 targets
 - [ ] Research Indigenous water funding programs (see `docs/FUNDING_STRATEGY.md`)
 - [ ] Track responses in PROGRESS.md
+- [ ] Outreach language positions the dashboard as proof and Ask Water-Intel as the next differentiation layer
 
 ## Day 19 — Funding Application Skeleton
 - [ ] Create `docs/funding_application_skeleton.md`
@@ -66,3 +72,6 @@ All of these must be true:
 - These are business tasks, not engineering tasks — the product must work before we pitch
 - Don't be afraid to simplify the demo if the full pipeline isn't stable
 - Letters of support are more valuable than fancy features at this stage
+- The public-facing Week 4 story should be: dashboard proof now, Ask Water-Intel next, MCP build after that.
+- The brief should support the website, not compete with it: concise, credible, and clearly tied to the product page.
+- Keep moving forward: the next gains come from packaging, credibility, and interaction design, not from squeezing a little more polish out of the current dashboard.
