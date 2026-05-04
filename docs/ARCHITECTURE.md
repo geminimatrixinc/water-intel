@@ -34,7 +34,8 @@
 ┌──────────────────────────────┼──────────────────────────────────┐
 │                              ▼  API LAYER                       │
 │                                                                 │
-│  api/main.py (FastAPI)                                          │
+│  services/api/main.py (FastAPI, canonical)                      │
+│  api/main.py (compatibility shim)                               │
 │    GET /health                                                  │
 │    GET /sites ────────────→ site_summary.csv → JSON             │
 │    GET /sites/{id} ───────→ filtered summary → JSON             │
@@ -47,7 +48,7 @@
 ┌──────────────────────────────┼──────────────────────────────────┐
 │                              ▼  PRESENTATION LAYER              │
 │                                                                 │
-│  web/app/ (Next.js + React + Tailwind)                          │
+│  web/app/ (Next.js + React + Tailwind, transitional exception)  │
 │    /dashboard ────────────→ Site picker (list + risk badges)    │
 │    /dashboard/sites/{id} ─→ Risk card + anomaly table + chart   │
 │                                                                 │
@@ -161,7 +162,12 @@ Phase 3 adds:
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-See [Roadmap — Phase 3](../workplan/Roadmap.md) for full implementation details.
+See [Roadmap — Phase 3](../planning/Roadmap.md) for full implementation details.
+
+### Repository Alignment Note
+- `services/api/` is now the canonical backend location.
+- `api/` remains as a compatibility bridge for existing local commands.
+- `web/app/` intentionally stays in place during this transition to avoid breaking the current frontend workflow.
 
 ### Ask Water-Intel as the Operator Surface
 

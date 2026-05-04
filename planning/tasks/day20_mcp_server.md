@@ -17,7 +17,7 @@ Wrap the existing Water-Intel FastAPI endpoints as MCP tools so that any MCP-com
 
 ## Deliverables
 
-### `mcp/water_intel_server.py` (MCP Server)
+### `ai/mcp/server/water_intel_server.py` (MCP Server)
 MCP tools (wrapping existing API logic):
 - `get_risk_score(site_id)` → `{score, label, last_updated}`
 - `get_anomalies(site_id, days=30)` → anomaly list with drivers
@@ -29,13 +29,13 @@ MCP resources (static/slow-changing data):
 - `water://sites` → list of monitored stations with metadata
 - `water://data-dictionary` → parameter definitions + units
 
-### `mcp/config.json` (MCP server config for Claude Desktop / VS Code)
+### `ai/mcp/server/config.json` (MCP server config for Claude Desktop / VS Code)
 ```json
 {
   "mcpServers": {
     "water-intel": {
       "command": "python",
-      "args": ["mcp/water_intel_server.py"],
+      "args": ["ai/mcp/server/water_intel_server.py"],
       "env": {}
     }
   }
@@ -48,7 +48,7 @@ MCP resources (static/slow-changing data):
 
 ## Technical Approach
 1. Install `mcp` SDK: `pip install mcp`
-2. Reuse data-loading logic from `api/main.py` (import, don't duplicate)
+2. Reuse data-loading logic from `services/api/main.py` (import, don't duplicate)
 3. Define tools with `@server.tool()` decorators
 4. Define resources with `@server.resource()` decorators
 5. Use stdio transport (standard for local MCP servers)

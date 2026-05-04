@@ -17,14 +17,14 @@ Build an LLM-powered agent that orchestrates Water-Intel's own MCP tools + exter
 
 ## Deliverables
 
-### `mcp/agent/water_agent.py` (Reasoning Agent)
+### `ai/agents/water-intel/workflows/water_agent.py` (Reasoning Agent)
 Capabilities:
 - Answer natural language questions: *"What's happening on the Grand River today?"*
 - Generate daily operator briefings: risk summary, anomalies, weather context
 - Cross-reference multiple MCP sources to detect converging risk factors
 - Explain its reasoning in plain language (not ML jargon)
 
-### `mcp/agent/briefing_generator.py`
+### `ai/agents/water-intel/workflows/briefing_generator.py`
 - Automated daily briefing template
 - Pulls from: Water-Intel MCP (risk + anomalies) + Weather MCP + Water Level MCP
 - Output format: structured markdown or JSON
@@ -48,7 +48,7 @@ Capabilities:
   RECOMMENDATION: Continue standard monitoring. Re-check GRAND_RIVER_01 tomorrow.
   ```
 
-### `mcp/agent/prompts/system_prompt.md`
+### `ai/agents/water-intel/prompts/system_prompt.md`
 - Agent system prompt with:
   - Role: Water safety intelligence analyst
   - Available tools (MCP tools it can call)

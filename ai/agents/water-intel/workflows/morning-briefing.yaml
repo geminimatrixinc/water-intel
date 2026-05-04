@@ -1,0 +1,11 @@
+name: morning-briefing
+description: Generate a concise operator-facing daily briefing from Water-Intel risk and anomaly outputs.
+inputs:
+  - watershed
+  - as_of_date
+steps:
+  - load_site_summary
+  - load_recent_anomalies
+  - summarize_notable_sites
+  - draft_operator_briefing
+output: markdown

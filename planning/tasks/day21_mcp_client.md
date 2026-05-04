@@ -17,22 +17,22 @@ Build MCP client adapters so Water-Intel can pull real-time data from external s
 
 ## Deliverables
 
-### `mcp/clients/weather_client.py`
+### `ai/mcp/clients/weather_client.py`
 - Connect to Environment Canada weather data (or simulated MCP server for demo)
 - Pull: current conditions, precipitation forecast, flood warnings
 - Methods: `get_current_weather(station)`, `get_precip_forecast(station, hours)`
 
-### `mcp/clients/water_level_client.py`
+### `ai/mcp/clients/water_level_client.py`
 - Connect to ECCC hydrometric data (or simulated MCP server for demo)
 - Pull: real-time water levels, discharge rates, flood stage
 - Methods: `get_water_level(station)`, `get_discharge(station)`
 
-### `mcp/clients/advisory_client.py`
+### `ai/mcp/clients/advisory_client.py`
 - Connect to ISC drinking water advisory data (or simulated)
 - Pull: active advisories, advisory history, community status
 - Methods: `get_active_advisories(region)`, `get_advisory_history(community)`
 
-### `mcp/demo_external_server.py` (simulated external MCP server for demo)
+### `ai/mcp/server/demo_external_server.py` (simulated external MCP server for demo)
 - Returns realistic mock data for weather, water levels, advisories
 - Used when real external MCP servers don't exist yet
 - Clearly labeled as demo/simulated

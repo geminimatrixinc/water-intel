@@ -12,21 +12,23 @@ Build a lightweight API that serves the ML pipeline outputs to the React dashboa
 
 ## Deliverables
 
-### `api/main.py` (FastAPI)
+### `services/api/main.py` (FastAPI)
 - `GET /health` → `{"status": "ok", "version": "0.1.0"}`
 - `GET /sites` → reads `outputs/site_summary.csv`, returns JSON array
 - `GET /sites/{site_id}` → single site summary + filtered anomalies
 - `GET /anomalies?site_id=...` → reads `outputs/anomalies.csv`, returns filtered JSON
 - `GET /risk/{site_id}` → `{score, label, last_updated}`
 
-### `api/requirements.txt`
+### `services/api/requirements.txt`
 - fastapi, uvicorn, pandas
+- `api/requirements.txt` remains a compatibility include
 
 ### CORS
 - Allow `http://localhost:3000` (Next.js dev server)
 
 ## Acceptance Criteria
 - [x] API starts with `uvicorn api.main:app --reload`
+- [x] Canonical backend lives at `services/api/main.py`
 - [x] All 5 endpoints return valid JSON
 - [x] CORS allows frontend to connect
 - [x] Handles missing site_id gracefully (404)

@@ -152,16 +152,18 @@ Phase 2 is not possible with public 2A alone without overclaiming.
 ---
 
 ## Repo structure
-- `data/`
-  - `sample_water.csv` (ISC advisories)
-  - `DATA_DICTIONARY.md`
-  - `sample_water_quality.csv` (ECCC monitoring)
-  - `DATA_DICTIONARY_water_quality.md`
-- `src/` (coming next)
-  - `ingest/` (load + validate datasets)
-  - `features/` (feature engineering)
-  - `models/` (baseline models)
-  - `reports/` or `dashboard/` (outputs)
+- `services/api/` — canonical FastAPI service (`api/main.py` remains a compatibility shim)
+- `web/app/` — Next.js dashboard kept in place as a transitional exception during the refactor
+- `ml/` — ingestion, feature engineering, models, and reports
+- `data/` — public/source datasets and dictionaries
+- `outputs/` — generated anomaly and site-summary artifacts
+- `planning/` — canonical roadmap, sprint overview, and task breakdowns
+- `ops/scripts/` — canonical operational scripts (`run-dashboard.ps1` still works from the repo root)
+- `ai/agents/water-intel/` — prompts, instructions, skills, hooks, workflows, evals, and context scaffolding
+- `ai/mcp/` — future MCP server, client, resource, and schema scaffolding
+- `packages/contracts/` — shared contract placeholder for cross-surface types
+
+The repo is now organized as a product surface (`web`, `services/api`, `ml`) plus an AI control plane (`ai`, `packages/contracts`, `planning`, `ops`) so Copilot and future MCP agents can grow without scattering prompts and agent logic across the app code.
 
 ---
 

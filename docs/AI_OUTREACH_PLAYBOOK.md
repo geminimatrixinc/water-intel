@@ -230,7 +230,7 @@ These docs have the detail AI needs to write great content for you:
 - `docs/BUSINESS_PLAN.md` — full company + product description
 - `docs/MISSION_STATEMENT.md` — values, principles, language to use
 - `docs/FUNDING_STRATEGY.md` — grant programs, budget template, key messages
-- `workplan/tasks/days15-19_traction.md` — outreach targets and tasks
+- `planning/tasks/days15-19_traction.md` — outreach targets and tasks
 
 **Pro tip:** When starting a new AI conversation for outreach, paste the relevant sections from these docs so AI has your full context. The more context you give, the better the output.
 

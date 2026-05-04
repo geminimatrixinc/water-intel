@@ -4,6 +4,14 @@
 
 ---
 
+### 2026-05-03 — Repository Structure Refactor
+- ✅ Done: moved the canonical FastAPI app to `services/api/main.py` and kept `api/main.py` plus `api/requirements.txt` as compatibility shims
+- ✅ Done: moved the canonical dashboard launcher to `ops/scripts/run-dashboard.ps1` and kept the root `run-dashboard.ps1` as a forwarding wrapper
+- ✅ Done: established `planning/`, `ai/`, and `packages/contracts/` scaffolding while documenting `web/app/` as a deliberate transitional exception
+- ✅ Done: added agent-first scaffolding for prompts, instructions, workflows, MCP schemas, and future skills/hooks
+- 🧠 Learned: the safest refactor path is to make canonical locations explicit while leaving legacy entrypoints in place for local developer workflows
+- 🔥 Next: continue updating remaining references toward `planning/`, `services/api/`, and future `ai/mcp` ownership as new work lands
+
 ### 2026-04-15 — Dashboard/Detail Checkpoint + Focus Shift
 - ✅ Done: treated the dashboard summary and site detail views as phase-complete for the current MVP pass
 - ✅ Done: updated roadmap and Week 4 planning so the next emphasis is product packaging, company website, Ask Water-Intel positioning, and the technical/pilot brief
@@ -38,8 +46,8 @@
 - 🔥 Next: Day 14 — demo pack and pilot-ready one-pager built around the live dashboard flow
 
 ### 2026-04-12 — Day 12: FastAPI Backend
-- ✅ Done: `api/main.py` — FastAPI app serving CSV-backed endpoints for health, sites, site detail, anomalies, and risk
-- ✅ Done: `api/requirements.txt` — minimal API dependencies (`fastapi`, `uvicorn`, `pandas`)
+- ✅ Done: `services/api/main.py` — FastAPI app serving CSV-backed endpoints for health, sites, site detail, anomalies, and risk (`api/main.py` remains a compatibility shim)
+- ✅ Done: `services/api/requirements.txt` — minimal API dependencies (`fastapi`, `uvicorn`, `pandas`) with `api/requirements.txt` preserved as a compatibility include
 - ✅ Verified: local server starts with `uvicorn api.main:app --reload`; `/health`, `/sites`, `/sites/{site_id}`, `/anomalies`, and `/risk/{site_id}` return valid JSON
 - ✅ Verified: CORS allows `http://localhost:3000`; missing `site_id` returns 404
 - 🧠 Learned: API should treat `station_id` as the canonical identifier and return real anomaly rows rather than mimic the old mock turbidity/ph/chlorine shape
@@ -106,7 +114,7 @@
 - 🔥 Next: Day 7 — feature engineering (Day 6 EDA is off critical path)
 
 ### 2026-03-14 — Project Planning & Structure
-- ✅ Done: Full project audit, task breakdown created in `workplan/tasks/`, architecture doc, folder structure gaps closed
+- ✅ Done: Full project audit, task breakdown created in `planning/tasks/`, architecture doc, folder structure gaps closed
 - 🧠 Learned: Days 1–4 deliverables are solid; ML pipeline (features → model → API) is the critical path
 - 🔥 Next: Day 5 — build_processed.py (Raw → Processed pipeline)
 

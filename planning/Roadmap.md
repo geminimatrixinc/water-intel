@@ -26,7 +26,6 @@ By the end of **Week 3**, we can run:
 ```
 water-intel/
   README.md
-  Roadmap.md
   PROGRESS.md
   .gitignore
 
@@ -59,11 +58,31 @@ water-intel/
     reports/
       site_summary.py
 
+  services/
+    api/
+      main.py                      # FastAPI (canonical)
+      requirements.txt
+
   api/
-    main.py                        # FastAPI
+    main.py                        # compatibility shim
+    requirements.txt               # compatibility include
+
+  ops/
+    scripts/
+      run-dashboard.ps1            # canonical launcher
+
+  planning/
+    Roadmap.md
+    SPRINT_OVERVIEW.md
+    tasks/
+
+  ai/
+    agents/
+      water-intel/
+    mcp/
 
   web/
-    (React app)
+    app/                           # transitional exception while the frontend stays in place
 ```
 
 ---
@@ -100,13 +119,13 @@ Each day ends with:
 - **Day 11:** Risk scoring — 0–100 risk score + Safe/Watch/Concern labels added to site summaries
 - **Day 12:** FastAPI backend — CSV-backed API endpoints implemented and verified locally with CORS
 - **Day 13:** Dashboard wiring — Next.js dashboard now renders live site summaries, risk details, anomaly table, and anomaly timeline from FastAPI
-- **Planning:** Task breakdown created in `workplan/tasks/`, PROGRESS.md started, architecture documented, pilot targets + AI outreach playbook
+- **Planning:** Task breakdown created in `planning/tasks/`, PROGRESS.md started, architecture documented, pilot targets + AI outreach playbook
 
 ### Current focus ▶
 - **Day 14:** Demo pack + pilot-ready artifacts built around the live dashboard flow
 
 ### Task Files
-Detailed acceptance criteria for each day: `workplan/tasks/`
+Detailed acceptance criteria for each day: `planning/tasks/`
 
 ---
 
@@ -262,7 +281,8 @@ Detailed acceptance criteria for each day: `workplan/tasks/`
 
 ### Day 12 — Minimal API (FastAPI) to serve risk + anomalies
 **Deliverable**
-- `api/main.py` (FastAPI)
+- `services/api/main.py` (FastAPI canonical entrypoint)
+  - `api/main.py` remains as a compatibility shim for `uvicorn api.main:app --reload`
   - `GET /health`
   - `GET /sites` → reads `outputs/site_summary.csv`
   - `GET /anomalies?site_id=...` → reads `outputs/anomalies.csv`
@@ -373,7 +393,7 @@ We are "Week 4 done" when all are true:
 
 ### Day 20 — MCP Server: Expose Water-Intel as agent tools
 **Deliverable**
-- `mcp/water_intel_server.py` — MCP server wrapping existing API logic
+- `ai/mcp/server/water_intel_server.py` — MCP server wrapping existing API logic
 - Tools: `get_risk_score`, `get_anomalies`, `get_site_summary`, `get_site_list`, `get_parameter_trend`
 - Resources: `water://sites`, `water://data-dictionary`
 - Testable from Claude Desktop or VS Code Copilot
@@ -382,18 +402,18 @@ We are "Week 4 done" when all are true:
 
 ### Day 21 — MCP Client: Consume external data agents
 **Deliverable**
-- `mcp/clients/weather_client.py` — weather data adapter
-- `mcp/clients/water_level_client.py` — hydrometric data adapter
-- `mcp/clients/advisory_client.py` — advisory status adapter
-- `mcp/demo_external_server.py` — simulated external MCP server for demo
+- `ai/mcp/clients/weather_client.py` — weather data adapter
+- `ai/mcp/clients/water_level_client.py` — hydrometric data adapter
+- `ai/mcp/clients/advisory_client.py` — advisory status adapter
+- `ai/mcp/server/demo_external_server.py` — simulated external MCP server for demo
 - Optional: weather correlation in risk scoring
 
 **Commit:** `feat: mcp clients — weather, water level, advisory data agents`
 
 ### Day 22 — Autonomous Water-Intel Agent (LLM + MCP orchestration)
 **Deliverable**
-- `mcp/agent/water_agent.py` — LLM agent that reasons across MCP sources
-- `mcp/agent/briefing_generator.py` — automated daily water briefings
+- `ai/agents/water-intel/workflows/water_agent.py` — LLM agent that reasons across MCP sources
+- `ai/agents/water-intel/workflows/briefing_generator.py` — automated daily water briefings
 - Agent answers: "What's happening on the Grand River today?"
 - Minimal Ask Water-Intel conversational interface for guided operator-style Q&A
 - Generates operator-friendly briefings with recommendations

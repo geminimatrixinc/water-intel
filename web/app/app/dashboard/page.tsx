@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Alert } from "@heroui/react";
 
 import { getAppUrl } from "../lib/api";
-import { buildRecentTrendPoints } from "../lib/chartData";
 import { formatDisplayDate } from "../lib/dates";
 import {
   dashboardTitle,
@@ -14,34 +13,13 @@ import {
   sourceWaterComparison,
 } from "../lib/interpretation";
 import { getStationMetadata } from "../lib/stations";
-import type { RiskLabel, SiteDetailResponse, SiteSummary } from "../lib/types";
-
-import SiteTrendSparkline from "./SiteTrendSparkline";
+import type { RiskLabel, SiteSummary } from "../lib/types";
 
 async function getSites(): Promise<SiteSummary[]> {
   const res = await fetch(getAppUrl("/api/sites"), { cache: "no-store" });
 
   if (!res.ok) throw new Error("Failed to load sites");
   return (await res.json()) as SiteSummary[];
-}
-
-async function getSiteTrendMap(siteIds: string[]) {
-  const entries = await Promise.all(
-    siteIds.map(async (siteId) => {
-      const response = await fetch(getAppUrl(`/api/sites/${siteId}`), {
-        cache: "no-store",
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to load trend data for ${siteId}`);
-      }
-
-      const detail = (await response.json()) as SiteDetailResponse;
-      return [siteId, buildRecentTrendPoints(detail.anomalies)] as const;
-    }),
-  );
-
-  return Object.fromEntries(entries);
 }
 
 function legendAlertStatus(status: RiskLabel): "success" | "warning" | "danger" {
@@ -92,13 +70,11 @@ function siteStatusIcon(status: RiskLabel) {
 
 export default async function DashboardPage() {
   let sites: SiteSummary[] = [];
-  let siteTrendMap: Awaited<ReturnType<typeof getSiteTrendMap>> = {};
   let errorMessage: string | null = null;
   const comparison = sourceWaterComparison();
 
   try {
     sites = await getSites();
-    siteTrendMap = await getSiteTrendMap(sites.map((site) => site.station_id));
   } catch (error) {
     errorMessage =
       error instanceof Error ? error.message : "Failed to load dashboard data";
@@ -312,7 +288,16 @@ export default async function DashboardPage() {
               </div>
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", flex: "0 0 200px", maxWidth: 220 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                flex: "0 0 auto",
+                minWidth: 104,
+              }}
+            >
               <div
                 style={{
                   minWidth: 104,
@@ -355,11 +340,6 @@ export default async function DashboardPage() {
                   {site.risk_label}
                 </span>
               </div>
-
-              <SiteTrendSparkline
-                points={siteTrendMap[site.station_id] ?? []}
-                riskLabel={site.risk_label}
-              />
             </div>
           </Link>
             );

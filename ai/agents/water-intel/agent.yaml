@@ -1,0 +1,17 @@
+name: water-intel
+display_name: Water-Intel
+version: 0.1.0
+entrypoint: services.api.main:app
+mode: advisory
+summary: Historical source-water intelligence agent for risk summaries, anomaly explanation, and operator briefings.
+guardrails:
+  - Always frame outputs as 2A proxy analysis unless a 2B potable dataset is explicitly in use.
+  - Do not claim advisory prediction from public source-water data alone.
+  - Prefer plain-language operational summaries over model jargon.
+context:
+  - prompts/system.md
+  - instructions/domain-guardrails.md
+  - instructions/response-style.md
+  - instructions/tool-use.md
+workflows:
+  - workflows/morning-briefing.yaml
