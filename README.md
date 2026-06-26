@@ -114,6 +114,6 @@ True advisory-risk prediction requires potable water system data: treatment plan
 ## Built by
 
 [Mike Denton](https://github.com/geminimatrixinc) — Senior Full Stack / AI Engineer  
-Gemini Matrix Consulting Inc. · Milton, Ontario, Canada
+Gemini Matrix Consulting Inc. · Ohsweken, ON, Canada
 
 ML Practitioner Certificate — University of Waterloo (Supervised Learning, Unsupervised Learning, Neural Networks)
