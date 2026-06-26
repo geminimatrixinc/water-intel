@@ -1,197 +1,119 @@
-# Indigenous Water Safety — Data + ML Roadmap (MVP)
+# Water-Intel
 
-## North Star goal
-Build a data-driven system that can **flag early risk of unsafe drinking water** in First Nations communities, so decision-makers can prioritize intervention **before** a crisis becomes long-term.
+An AI-powered early-warning platform for drinking water safety in Indigenous communities across Canada.
 
-This repo intentionally starts with **public datasets** so we can ship an MVP, but the *true* end-goal requires **governance-approved potable-water system data**.
-
----
-
-## What “solving the problem” actually means (in this project)
-### We are NOT trying to predict river height or flooding.
-We are trying to help reduce:
-- **Boil Water Advisories (BWA)**
-- **Do Not Consume (DNC)**
-- **Do Not Use (DNU)**
-
-These advisories are driven by:
-- contamination (bacteria, metals, turbidity, etc.),
-- treatment failures,
-- operator capacity / staffing,
-- infrastructure condition / underfunding.
+**[Live Dashboard](https://water.geminimatrixinc.com/dashboard)** · **[Repo](https://github.com/geminimatrixinc/water-intel)**
 
 ---
 
-## Datasets (current + target)
+## What it does
 
-### Dataset 1 — ISC Advisories (Outcome / Label data)
-**Purpose:** This is our “ground truth” for the crisis outcome: advisory type, start/lift dates, long-term classification, and basic context (system name, region, corrective measure, project phase, lat/lon).
+Canada has a persistent drinking water crisis in First Nations communities. Boil Water Advisories (BWAs) can last years — sometimes decades — because deteriorating water quality isn't caught early enough to act on.
 
-**File(s):**
-- `data/sample_water.csv`
-- `data/DATA_DICTIONARY.md`
+Water-Intel ingests public watershed monitoring data, runs an ML anomaly detection pipeline against it, and surfaces site-level risk scores and recommended actions through an interactive dashboard. The goal is to give decision-makers an early signal — before a contamination event becomes a long-term advisory.
 
-**How we use it:**
-- Build analytics: counts, durations, trends, map views
-- ML labels for later:
-  - `status` (Active vs Lifted)
-  - `is_long_term`
-  - `days_under_advisory` (derived)
-
-> NOTE: This dataset is often exported for mapping, but it is still a valid advisory fact table for analysis and modeling.
+The live dashboard currently monitors 8 sites across Ontario watersheds, scoring each site on a 0–100 risk scale with parameter-level driver analysis explaining what's driving the score.
 
 ---
 
-### Dataset 2A — Public surface water quality monitoring (Proxy signal data)
-**Source:** Environment and Climate Change Canada (ECCC) “National Long-term Water Quality Monitoring Data”  
-**Purpose:** Real measured readings over time (chemistry, bacteria, physical parameters) at monitoring sites.
+## Live demo
 
-**What it is:**
-- **Public, time-series water quality readings**
-- Typically **ambient surface water** (rivers/lakes monitoring sites)
-- Great for modeling **water quality deterioration / anomalies**
+**[water.geminimatrixinc.com/dashboard](https://water.geminimatrixinc.com/dashboard)**
 
-**What it is NOT:**
-- Not guaranteed to be **tap water** at a First Nation distribution system
-- Not always directly tied to the water system that triggered an advisory
-
-**Files:**
-- `data/sample_water_quality.csv`
-- `data/DATA_DICTIONARY_water_quality.md`
-
-**What we can do with 2A right now:**
-- Train ML models for:
-  - anomaly detection (spikes in turbidity/E. coli/metals)
-  - forecasting / trend detection (seasonality + drift)
-  - site-level “risk score” time-series
-- Build the pipeline + code foundation we’ll later reuse for 2B.
-
-**What we cannot honestly claim with only 2A:**
-- “We can predict ISC drinking water advisories in community systems.”
-2A can support *proxy insights* and methodology, but it is not the authoritative potable-water dataset.
+Sites are scored and ranked by risk level. Each site shows:
+- Risk score (0–100) with Safe / Watch / Concern classification
+- Top contributing parameter (e.g. iron, strontium, conductivity)
+- Anomaly count and last updated timestamp
+- Plain-language recommended action
 
 ---
 
-### Dataset 2B — The *real* target for drinking-water safety ML (Requires clearance)
-**Goal:** Potable drinking water system data that reflects what causes advisories:
-- treatment plant monitoring results (turbidity, residual chlorine, bacteria results, metals)
-- system operational status, compliance and inspection outcomes
-- risk rating assessments, operator certification/capacity
-- maintenance logs, outages, infrastructure condition
+## Tech stack
 
-**Why 2B matters:**
-If we want to truly build an “early warning” model that is accurate at the **community water system** level, we need data collected *at or inside the potable water system*, not just nearby surface water.
-
-**Constraint:**
-Access likely requires:
-- data-sharing agreements,
-- privacy/security review,
-- and Indigenous data governance considerations (OCAP® principles and community consent).
-
-**Status:**
-- Not included in this repo (public MVP only).
-- The repo is structured so we can plug it in later with minimal refactor.
+| Layer | Stack |
+|---|---|
+| Frontend | Next.js 14, React, TypeScript, Tailwind CSS |
+| Backend API | FastAPI (Python), served via `services/api/` |
+| ML Pipeline | Python, scikit-learn, pandas, NumPy |
+| Data | ECCC National Long-term Water Quality Monitoring (public) |
+| AI layer | Agent scaffolding, MCP structure, prompt/eval organization (`ai/`) |
+| Deployment | Cloud-hosted, CI/CD via GitHub Actions |
 
 ---
 
-## MVP ML Objective (Phase 1)
-**Anomaly Detection on Public Water Quality (2A)**
+## How the ML pipeline works
 
-Goal: Build a system that can **flag unusual deterioration signals** in public water quality time-series (ECCC monitoring sites), such as spikes in:
-- E. coli / fecal coliforms
-- turbidity
-- metals (lead/arsenic)
-- conductivity / other supporting parameters
+The core problem is anomaly detection on multivariate environmental time-series data — not a clean or well-behaved dataset.
 
-Output (per site + timestamp):
-- `anomaly_score` (0–1 or z-score style)
-- `is_anomaly` (boolean using a threshold)
-- `top_contributing_features` (what triggered it)
+**Pipeline stages:**
 
-Important: This Phase 1 model does **not** claim to predict ISC drinking-water advisories for specific First Nations systems.
+1. **Ingest + normalize** — Raw ECCC files across hundreds of monitoring stations are ingested, validated, and merged into a consistent schema. Missing data, irregular sampling intervals, and unit inconsistencies are handled at this stage.
 
-That requires Phase 2 (2B) potable system data + governance-approved access.
+2. **Feature engineering** — Rolling statistics (mean, std, rate of change), seasonality indicators, missingness flags, and parameter interaction features are built per site per parameter.
 
----
+3. **Anomaly detection** — Trained per-site models flag statistical outliers against historical baselines. The model outputs an `anomaly_score`, `is_anomaly` boolean, and `top_contributing_features` — the specific parameters that drove the flag.
 
-## Data Strategy
-### Dataset 1 — ISC Advisories (labels/outcomes, contextual)
-Used for: policy/progress analytics, mapping, and future supervised learning once 2B is available.
-Not used as the direct training label for Phase 1 anomaly detection.
+4. **Risk scoring** — Site-level risk scores (0–100) aggregate anomaly history, severity, recency, and parameter weighting into a single interpretable signal.
 
-### Dataset 2A — ECCC Water Quality (training + scoring for anomaly detection)
-Used for: training and scoring site-level anomaly detection models.
+5. **Driver analysis** — Each score is traceable. The dashboard shows which parameter triggered the score and why, so operators can act on the result rather than just react to a number.
 
-We maintain two forms of 2A data:
-- `data/sample/sample_water_quality.csv` → small, committed, used for dev/tests
-- `data/raw/` → large real datasets (hundreds of files), NOT committed
-- `data/processed/` → normalized merged dataset produced by scripts (parquet/csv), NOT committed
+**Why driver analysis matters:** An anomaly score without explainability is unshippable in a high-stakes context. A risk score of 76 on a water safety platform needs to mean something actionable, not just "the model flagged this."
 
 ---
 
-## Phase 1 Deliverables
-1. Ingest + normalize raw ECCC files into a consistent schema
-2. Feature engineering (rolling stats, seasonality hints, missingness, rate of change)
-3. Train anomaly model(s)
-4. Score latest data and export:
-   - `outputs/anomalies.csv`
-   - `outputs/site_summary.csv`
-5. Simple visualization/dashboard (optional)
+## Architecture
+
+The repo is organized as a product surface plus an AI control plane:
+
+```
+water-intel/
+├── web/app/          # Next.js dashboard (frontend)
+├── services/api/     # FastAPI backend (canonical service layer)
+├── ml/               # Ingestion, feature engineering, models, scoring
+├── data/             # Public datasets + dictionaries
+├── outputs/          # Generated anomaly and site-summary artifacts
+├── ai/
+│   ├── agents/       # Agent prompts, skills, hooks, evals, workflows
+│   └── mcp/          # MCP server/client scaffolding (Phase 2)
+├── packages/contracts/ # Shared type contracts across surfaces
+├── planning/         # Roadmap, sprint plans, task breakdowns
+└── ops/scripts/      # Operational scripts and deployment tooling
+```
+
+The AI control plane (`ai/`, `packages/contracts`) is structured so agent logic and MCP integrations can grow independently of the application code — a pattern borrowed from micro-frontend architecture applied to agentic systems.
 
 ---
 
-## Phase 2 Target (2B, requires clearance)
-To **predict advisory risk at a community potable-water system level**, we will need 2B data such as:
-- treatment plant monitoring / distribution testing results
-- operational logs and compliance results
-- system risk ratings, operator capacity indicators
+## Data sources and honesty
 
-Phase 2 is not possible with public 2A alone without overclaiming.
+**What's powering Phase 1:**
+Public ambient surface water monitoring from Environment and Climate Change Canada (ECCC) — watershed readings at rivers and lakes near communities. This is proxy data, not potable system data.
 
+**What Phase 1 can and cannot claim:**
+The current model detects deterioration signals in source water. It does not predict drinking water advisories at the community system level — that requires data collected inside the treatment plant and distribution system (Phase 2).
 
----
+This distinction is built into the architecture. The platform is honest about what it sees.
 
-## Repo structure
-- `services/api/` — canonical FastAPI service (`api/main.py` remains a compatibility shim)
-- `web/app/` — Next.js dashboard kept in place as a transitional exception during the refactor
-- `ml/` — ingestion, feature engineering, models, and reports
-- `data/` — public/source datasets and dictionaries
-- `outputs/` — generated anomaly and site-summary artifacts
-- `planning/` — canonical roadmap, sprint overview, and task breakdowns
-- `ops/scripts/` — canonical operational scripts (`run-dashboard.ps1` still works from the repo root)
-- `ai/agents/water-intel/` — prompts, instructions, skills, hooks, workflows, evals, and context scaffolding
-- `ai/mcp/` — future MCP server, client, resource, and schema scaffolding
-- `packages/contracts/` — shared contract placeholder for cross-surface types
-
-The repo is now organized as a product surface (`web`, `services/api`, `ml`) plus an AI control plane (`ai`, `packages/contracts`, `planning`, `ops`) so Copilot and future MCP agents can grow without scattering prompts and agent logic across the app code.
-
----
-
-## Guardrails (so we don’t drift)
-- ✅ Always state whether we’re using **2A (proxy)** or **2B (potable system)** data.
-- ✅ Never claim we can predict community advisories from 2A alone.
-- ✅ Treat 2B as the long-term target required for true advisory prediction.
-- ✅ Respect Indigenous data governance and community consent if/when moving to 2B.
+**Phase 2 (requires governance clearance):**
+True advisory-risk prediction requires potable water system data: treatment plant telemetry, distribution testing results, operational logs, compliance outcomes, and system risk ratings. Access requires data-sharing agreements and Indigenous data governance review under OCAP® principles. The repo is structured to plug this in without refactoring the existing pipeline.
 
 ---
 
 ## Current status
-- [x] Dataset 1 added (ISC advisories) + dictionary
-- [x] Dataset 2A added (ECCC water quality readings) + dictionary
-- [ ] Next: build ingestion + validation scripts
-- [ ] Next: baseline anomaly detection / trend model on 2A
-- [ ] Later: design 2B schema + integration plan (pending governance/clearance)
+
+- [x] Public dataset ingestion (ISC advisories + ECCC water quality)
+- [x] ML anomaly detection pipeline (per-site, per-parameter)
+- [x] Risk scoring with driver analysis
+- [x] Live dashboard deployed with 8 monitored sites
+- [x] Agent scaffolding and MCP structure in place
+- [ ] Phase 2: potable system data integration (pending governance/clearance)
+- [ ] Phase 2: SCADA / real-time telemetry ingestion
 
 ---
 
-## Definitions (quick)
-- **2A:** Public ambient/surface water monitoring (useful signals, not potable system truth)
-- **2B:** Potable water system + operations data (needed for real advisory-risk prediction)
-- **Label/Outcome:** advisories (what we want to prevent)
-- **Signals/Features:** measurements + operational indicators (what predicts the outcome)
+## Built by
 
----
+[Mike Denton](https://github.com/geminimatrixinc) — Senior Full Stack / AI Engineer  
+Gemini Matrix Consulting Inc. · Milton, Ontario, Canada
 
-## License / data notes
-This repo includes **public datasets** and derived samples for development.
-If/when 2B is added, it may require separate storage, access control, and governance terms.
+ML Practitioner Certificate — University of Waterloo (Supervised Learning, Unsupervised Learning, Neural Networks)
