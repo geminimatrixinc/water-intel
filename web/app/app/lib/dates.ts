@@ -4,6 +4,13 @@ const displayDateFormatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
 });
 
+const utcDisplayDateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export function formatDisplayDate(value: string | null | undefined): string {
   if (!value) {
     return "Unavailable";
@@ -14,7 +21,7 @@ export function formatDisplayDate(value: string | null | undefined): string {
   if (dateOnlyMatch) {
     const [, year, month, day] = dateOnlyMatch;
     const utcDate = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)));
-    return displayDateFormatter.format(utcDate);
+    return utcDisplayDateFormatter.format(utcDate);
   }
 
   const parsedDate = new Date(value);

@@ -8,16 +8,18 @@
 
 ## 1. Executive Summary
 
-Gemini Matrix Consulting is an Indigenous-owned technology consulting company building **Water-Intel**, an AI-powered early-warning platform for drinking water safety in First Nations communities across Canada.
+**Gemini Matrix Consulting is an Indigenous-owned AI/ML systems integrator.** We build modern data, machine-learning, and agent systems for governments, Crown corporations, and Indigenous organizations — and we ship working software, not PDFs. **Water-Intel is our flagship vertical, not the whole company:** it is the proof that we can take a real-world data problem from raw feed to deployed, decision-ready intelligence.
 
-**The problem:** Dozens of Indigenous communities remain under long-term drinking water advisories due to aging infrastructure, insufficient monitoring, and gaps in early-warning capability.
+**Why this company, why now.** A mandatory minimum **5% of federal contract value** must now go to Indigenous business, in force across 96 departments — and buyers are *actively searching* for suppliers, especially in under-served categories like AI/ML. Most firms in the Indigenous Business Directory are construction, staffing, and facilities. The pool of Indigenous suppliers who can credibly ship modern AI is thin. That gap — Indigenous ownership *plus* real AI capability — is our structural moat.
 
-**Our solution:** A data-driven platform that ingests water quality monitoring data, detects anomalies using machine learning, and provides risk scores and actionable alerts — giving operators and decision-makers the information they need *before* a crisis escalates.
+**The reusable engine.** Our core pipeline — ingest → anomaly detection → driver hints → risk score → API → dashboard → (MCP/agent layer) — is domain-agnostic after the data-loader stage. Each new vertical is a new loader and a new framing, not a new company. This is what makes Gemini Matrix *fundable as a company*, not just contractable for one project.
 
-**Phase 1 (current):** MVP using public ECCC water quality data to demonstrate the technology and methodology.  
-**Phase 2 (target):** Integration with actual potable water system data, with community consent and data governance agreements in place.
+**The flagship problem (Water-Intel).** Dozens of First Nations communities remain under long-term drinking water advisories. Monitoring today is largely reactive — advisories are issued *after* failure. Water-Intel ingests water-quality monitoring data, detects multi-parameter anomalies with machine learning, and produces per-site risk scores and plain-language driver explanations, so operators and decision-makers have source-water context earlier and with more confidence.
 
-**What we're seeking:** Pilot community partnerships, letters of support, and funding to advance from prototype to field-ready deployment.
+- **Phase 1 (current, live):** Working MVP on public Ontario PWQMN / ECCC data — deployed dashboard at `water.geminimatrixinc.com`. A 2A proxy: it flags anomalies and trends; it does **not** predict ISC drinking water advisories.
+- **Phase 2 (target):** Integration with community-governed potable-system data, under OCAP®-compliant agreements, for grounded validation and operator-facing early warning.
+
+**What we're seeking:** the credentials and first references that turn capability into recurring public-sector revenue — verified IBD/CCAB standing, a reference pilot (Six Nations / OFNTSC), one funded validation partnership (Mitacs with McMaster), and the first sole-source federal engagement.
 
 ---
 
@@ -25,18 +27,41 @@ Gemini Matrix Consulting is an Indigenous-owned technology consulting company bu
 
 | | |
 |---|---|
-| **Legal Name** | Gemini Matrix Consulting |
-| **Type** | Indigenous-owned technology consulting |
+| **Legal Name** | Gemini Matrix Consulting Inc. |
+| **Type** | Indigenous-owned (100%) AI/ML systems integrator |
+| **Flagship vertical** | Water-Intel — source-water intelligence & decision support |
 | **Founder** | Mike |
-| **Location** | Canada |
-| **Website** | TBD (Day 16 — deploying to HostSigner) |
+| **Location** | Grand River territory, Ontario, Canada |
+| **Website** | geminimatrixinc.com (live) · demo: water.geminimatrixinc.com |
 | **Founded** | 2025 |
 
+### What We Are
+Not a single-product water startup, and not a generic consultancy. We are the rare Indigenous supplier that can architect and deliver a full modern AI stack — ingestion, ML, APIs, dashboards, and agent/MCP integration — and stand behind it in production. Water-Intel is the reference implementation of that capability.
+
 ### Core Competencies
-- Water quality data analysis and ML modeling
-- Full-stack web application development (Python, React, Next.js, FastAPI)
-- Indigenous data governance advisory (OCAP® aligned)
-- Grant writing and funding navigation for Indigenous tech projects
+- **AI/ML systems delivery** — data ingestion, anomaly detection, risk scoring, model explainability, end-to-end pipelines
+- **Agent & MCP architecture** — exposing data and tools to AI agents via the Model Context Protocol (Phase 3 capability)
+- **Full-stack engineering** — Python, FastAPI, React/Next.js, deployment and ops
+- **Indigenous data governance** — OCAP®-aligned design; data sovereignty as an architectural default
+- **Public-sector & Indigenous procurement fluency** — IBD/CCAB pathways, set-asides, IPP, and grant navigation
+
+### Vertical Roadmap (same engine, many buyers)
+| # | Vertical | Status |
+|---|----------|--------|
+| 1 | **Source / drinking-water intelligence** (Water-Intel) | ✅ Built & deployed |
+| 2 | Traditional-territory & environmental monitoring | Drop-in (reuses ingest + anomaly stack) |
+| 3 | Agentic case-management workflows (e.g. Jordan's Principle) | Reuses MCP/agent layer |
+| 4 | Indigenous language / heritage AI tooling | Adjacent capability |
+| 5 | Procurement & compliance AI (5%-target / IPP tracking) | Adjacent capability |
+
+> Lead with #1 — it is built and it hits a named federal priority. Keep #2 architecturally drop-in ready — that is what makes the company fundable, not just contract-able. See `planning/indigenous-track/00_strategy_overview.md` for the full procurement thesis.
+
+### Credentials Status
+| Credential | Unlocks | Status |
+|-----------|---------|--------|
+| IBD listing (Indigenous Business Directory) | Federal PSIB set-asides + the 5% target | Registered — verify current + correct NAICS |
+| CCAB Certified Aboriginal Business | Ontario provincial + Crown-corp set-asides | To apply |
+| ProServices / TBIPS (Indigenous supplier) | Federal professional-services call-ups | Later phase |
 
 ---
 
@@ -188,21 +213,22 @@ Most water plants operate at one of three levels:
 
 ## 9. Timeline
 
-| Phase | Timeline | Milestone |
-|-------|----------|-----------|
-| **Phase 1 MVP** | Weeks 1–3 (now) | Working demo: CSV → ML → Dashboard |
-| **Traction** | Week 4 | Company website, outreach, pitch materials |
-| **Pilot Funding** | Months 2–3 | First grant application submitted |
-| **Phase 2 Build** | Months 3–6 | Potable data integration, supervised models |
-| **Pilot Deploy** | Months 6–9 | 1–2 community pilots with real data |
-| **Evaluation** | Months 9–12 | Pilot results documented, scale plan |
+| Phase | Timeline | Status / Milestone |
+|-------|----------|--------------------|
+| **Phase 1 MVP** | Mar–May 2026 | ✅ Done — working demo deployed at water.geminimatrixinc.com |
+| **Traction** | May–Jul 2026 | 🟡 In progress — website live, McMaster/Six Nations relationship active, expert validation pending |
+| **Expert validation** | Jul–Aug 2026 | Hydrological expert review of methodology (McMaster-coordinated) — gates Phase 2 scope |
+| **Pilot Funding** | Q3–Q4 2026 | Mitacs + freshwater grant application in active progress (needs partner letter) |
+| **Phase 2 Build** | ~2 quarters post-funding | Community-governed data integration, supervised models |
+| **Pilot Deploy** | Following 2 quarters | 1–2 community pilots with real data |
 | **Phase 3 Scale** | Year 2+ | Multi-community, national platform |
 
 ### Key Events
 
 | Event | Timing | Why It Matters |
 |-------|--------|----------------|
-| **First Nations Investment Forum (Toronto)** | November 29-December 1, 2026 | Strategic venue to meet Indigenous leaders, capital providers, industry, and government partners; target event for partnership development, investor conversations, and Water-Intel visibility |
+| **Grand River Champion of Champions Powwow (Six Nations)** | Late July 2026 | Highest trust-per-dollar community presence — attend as community member, not vendor |
+| **First Nations Investment Forum (Toronto)** | Deferred to 2027 | Right audience, but wants investable projects with revenue; revisit once a pilot is signed ($1,100 + travel) |
 
 ---
 
@@ -215,6 +241,9 @@ Most water plants operate at one of three levels:
 | Community adoption resistance | Low–Medium | Medium | Indigenous-led, community-first approach, pilot with willing partners |
 | Technical: model accuracy insufficient | Low | Medium | Start with anomaly detection (proven), supervised models in Phase 2 |
 | Scope creep / feature bloat | Medium | Medium | Strict daily plan, scrum discipline, "ship then polish" |
+| Liability exposure (tool informs drinking-water decisions) | Medium | High | Decision-support framing in every contract (never certification/compliance); obtain E&O / professional liability insurance before first paid pilot; keep 2A guardrail language in all deliverables |
+| Indigenous procurement program changes (post-ArriveCan scrutiny of PSIB / 5% target) | Low–Medium | Medium | Keep ownership documentation audit-ready; diversify across federal, Ontario, Crown-corp, and Tier 3 (Nation-direct) buyers so no single program is load-bearing |
+| Solo-founder single point of failure | Medium | Medium | Everything documented in-repo (plans, runbooks, pipeline); prioritize first hire on funding; automate deploys so operations don't live in one person's head |
 
 ---
 

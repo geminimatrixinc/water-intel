@@ -2,7 +2,8 @@
 
 **Sprint:** Week 5 — MCP Agent Architecture  
 **Status:** 🔲 Not Started  
-**Depends on:** Day 20 (MCP server working)
+**Depends on:** Day 20 (MCP server working)  
+**🚧 DEFERRED:** This and Days 22–23 (autonomous agent, federated mesh) are the *expensive, speculative* agent work. **Do not start until a funded pilot or buyer asks for it** — see [gate_credentials_and_funding.md](gate_credentials_and_funding.md). The lean Day 20 server is enough for funding demos.
 
 ---
 

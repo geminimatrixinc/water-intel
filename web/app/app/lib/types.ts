@@ -15,6 +15,8 @@ export type SiteSummary = {
   rolling_30d_anomaly_count: number;
   risk_score: number;
   risk_label: RiskLabel;
+  corroborated_event_count?: number | null;
+  has_data_quality_flag?: boolean | null;
 };
 
 export type AnomalyRecord = {
@@ -27,6 +29,10 @@ export type AnomalyRecord = {
   is_anomaly: number;
   top_features: string | null;
   top_feature_values: string | null;
+  event_confidence?: "High" | "Possible" | "None" | null;
+  matched_event_type?: string | null;
+  matched_event_date?: string | null;
+  matched_event_description?: string | null;
 };
 
 export type SiteDetailResponse = {

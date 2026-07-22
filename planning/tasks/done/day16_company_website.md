@@ -1,14 +1,20 @@
 # Day 16 — Gemini Matrix Consulting Website (Next.js)
 
 **Sprint:** Week 4 — Traction + Company Presence  
-**Status:** 🔲 Not Started  
-**Depends on:** Day 14 (demo pack — screenshots and content ready)  
-**Blocked by:** Day 14 minimum; can scaffold earlier
+**Status:** ✅ Core deliverable shipped  
+**Depends on:** Website build work is complete; remaining polish can land independently  
+**Blocked by:** None
 
 ---
 
 ## Objective
-Build the Gemini Matrix Consulting company website using Next.js. This is the public face of the company — it must look professional, communicate Indigenous values, and include a dedicated section for the Water-Intel product. Hosted on HostSigner (dormant account — activate and configure).
+Build the Gemini Matrix Consulting company website using Next.js. This is the public face of the company — it must look professional, communicate Indigenous values, and include a dedicated section for the Water-Intel product. Hosted on Hostinger.
+
+## Progress Update — 2026-05-03
+- [x] Corporate website built and deployed to Hostinger
+- [x] Production domain moved over and serving the live company site
+- [x] Corporate navigation now links into the live Water-Intel dashboard
+- [ ] Technical brief / pilot-brief linkage and any extra product-page polish can continue separately without blocking traction work
 
 ## Architecture Decision
 - **Single Next.js app** (separate from the water-intel dashboard)
@@ -42,12 +48,12 @@ Build the Gemini Matrix Consulting company website using Next.js. This is the pu
 - Accessibility (WCAG 2.1 AA minimum)
 
 ### Hosting
-- Deploy to **HostSigner** (activate dormant account)
+- Deploy to **Hostinger**
 - Configure custom domain
 - SSL/HTTPS enabled
 
 ## Acceptance Criteria
-- [ ] Site loads on HostSigner with custom domain
+- [x] Site loads on Hostinger with custom domain
 - [ ] All 6 pages render correctly on desktop + mobile
 - [ ] Water-Intel product page includes real screenshots
 - [ ] Water-Intel product page makes the dashboard-to-agent progression understandable on first read
@@ -84,4 +90,4 @@ feat: gemini matrix consulting website v1
 - This is a credibility multiplier — funders will Google the company
 - The Water-Intel page is the bridge between "consulting company" and "funded product"
 - Don't over-build: 6 clean pages > 20 half-finished pages
-- HostSigner deployment docs should be followed during setup
+- Hostinger deployment docs should be followed during setup

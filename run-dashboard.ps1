@@ -6,7 +6,8 @@ param(
     [int]$WebPort = 3000,
     [int]$ApiPort = 8000,
     [int]$TimeoutSeconds = 120,
-    [switch]$NoBrowser
+    [switch]$NoBrowser,
+    [switch]$StopOnly
 )
 
 $ErrorActionPreference = "Stop"

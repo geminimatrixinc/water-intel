@@ -3,6 +3,8 @@ import type { AnomalyRecord } from "./types";
 export type AnomalyTimelinePoint = {
   timestamp: string;
   anomalyScore: number;
+  flowSpikeMarker?: number;
+  dataQualityMarker?: number;
   parameter: string;
   dateLabel: string;
   dateTimeLabel: string;
@@ -44,13 +46,25 @@ function formatDateTimeLabel(value: string) {
 export function buildAnomalyTimeline(anomalies: AnomalyRecord[]): AnomalyTimelinePoint[] {
   return [...anomalies]
     .sort((left, right) => left.timestamp.localeCompare(right.timestamp))
-    .map((anomaly) => ({
-      timestamp: anomaly.timestamp,
-      anomalyScore: anomaly.anomaly_score,
-      parameter: anomaly.parameter,
-      dateLabel: formatDateLabel(anomaly.timestamp),
-      dateTimeLabel: formatDateTimeLabel(anomaly.timestamp),
-    }));
+    .map((anomaly) => {
+      const matchedEventType = anomaly.matched_event_type ?? "";
+      const flowSpikeMarker =
+        matchedEventType === "flow_spike" || matchedEventType === "spill_and_flow_spike"
+          ? anomaly.anomaly_score
+          : undefined;
+      const dataQualityMarker =
+        matchedEventType === "data_quality" ? anomaly.anomaly_score : undefined;
+
+      return {
+        timestamp: anomaly.timestamp,
+        anomalyScore: anomaly.anomaly_score,
+        flowSpikeMarker,
+        dataQualityMarker,
+        parameter: anomaly.parameter,
+        dateLabel: formatDateLabel(anomaly.timestamp),
+        dateTimeLabel: formatDateTimeLabel(anomaly.timestamp),
+      };
+    });
 }
 
 export function buildRecentTrendPoints(

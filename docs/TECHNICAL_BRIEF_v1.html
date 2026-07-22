@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Water-Intel Technical Brief v2</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Water-Intel Technical Brief v2</h1>
+</header>
+<h1 id="water-intel-technical-brief-anomaly-detection-methodology">Water-Intel — Technical Brief: Anomaly Detection Methodology</h1>
+<p><strong>Prepared by:</strong> Mike, Gemini Matrix Consulting <strong>Date:</strong> July 2026 <strong>Version:</strong> v2 (updated 2026-07-21) <strong>Audience:</strong> Hydrology / hydrogeology reviewers <strong>Live prototype:</strong> https://water.geminimatrixinc.com/dashboard <strong>Status:</strong> Phase 1 proof of concept on public historical data. This brief describes what the system does, why, and — equally important — what it does not do yet.</p>
+<hr />
+<h2 id="problem-philosophy">1. Problem &amp; Philosophy</h2>
+<p>Water-Intel asks a narrow question: <strong>given routine water-quality monitoring data, can we automatically surface the readings and periods that deserve human attention?</strong></p>
+<p>We deliberately chose <strong>unsupervised anomaly detection</strong> rather than supervised prediction or forecasting, for three reasons:</p>
+<ol type="1">
+<li><strong>No labels exist.</strong> There is no dataset of Grand River readings tagged “this preceded a real event.” Without labels, supervised training is not honestly possible — and pretending otherwise produces models that overfit to proxies.</li>
+<li><strong>The events that matter most are the ones nobody anticipated.</strong> Threshold-based systems detect known failure modes against fixed limits. An unsupervised approach flags <em>any</em> multivariate departure from a station’s own recent behaviour, including patterns no one thought to write a rule for.</li>
+<li><strong>It transfers.</strong> An unsupervised pipeline works on any station’s data without per-site training labels, which matters for communities whose monitoring history is thin.</li>
+</ol>
+<p>We are explicit about the corollary: an anomaly is <strong>statistically unusual, not necessarily hazardous</strong>. The system is a prioritization layer for human judgment — it does not predict drinking water advisories, and we do not claim otherwise anywhere in the product.</p>
+<p><strong>Why Isolation Forest specifically:</strong> it is multivariate (sees combinations of signals, not one parameter at a time), efficient on modest data volumes, deterministic under a fixed seed (important for reproducible review), and its one structural assumption — that anomalies are few and different — is stated openly as a tunable contamination parameter rather than hidden in the method.</p>
+<h2 id="the-pipeline">2. The Pipeline</h2>
+<p><strong>Data.</strong> Ontario Provincial Water Quality Monitoring Network (PWQMN) public data, 2019–2024: <strong>8 active stations in the Grand River watershed within 45 km of Six Nations</strong> (nearest ~4 km), 13,194 station-parameter readings across <strong>103 parameters</strong> (conductivity, turbidity, nutrients, metals, ions, physical parameters). The loader normalizes three PWQMN schema generations into one canonical long format: <code>station_id, timestamp, parameter, value, unit</code>.</p>
+<p><strong>Feature engineering — where “local normal” is defined.</strong> Features are computed independently for every <strong>station + parameter</strong> group, so each series is compared only against its own history:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>delta</code></td>
+<td>change from the previous reading</td>
+</tr>
+<tr class="even">
+<td><code>time_gap_days</code></td>
+<td>days since the previous reading</td>
+</tr>
+<tr class="odd">
+<td><code>rate_of_change</code></td>
+<td>delta ÷ time gap (normalizes irregular sampling intervals)</td>
+</tr>
+<tr class="even">
+<td><code>is_gap</code></td>
+<td>flag when the gap exceeds 35 days</td>
+</tr>
+<tr class="odd">
+<td><code>rolling_mean_{7,14,30}</code>, <code>rolling_std_{7,14,30}</code></td>
+<td>rolling statistics over the last 7/14/30 <strong>readings</strong></td>
+</tr>
+<tr class="even">
+<td><code>zscore</code></td>
+<td>deviation from the 30-reading rolling mean, in units of the 30-reading rolling std</td>
+</tr>
+</tbody>
+</table>
+<p>Two honest details a reviewer should know: windows are defined in <strong>reading counts, not calendar time</strong>, because PWQMN sampling is periodic and irregular (roughly monthly in the monitoring season, and not every parameter at every visit). At that frequency a 7-reading window spans months and a 30-reading window can span years — so the rolling baselines capture a station’s <em>local longer-term normal</em> and partially absorb seasonality, but they do <strong>not</strong> explicitly model the seasonal cycle. Explicit seasonal decomposition is a Phase 2 item (Section 5).</p>
+<p><strong>Model.</strong> A single <strong>global Isolation Forest</strong> (200 trees, <code>contamination = 0.05</code>, fixed random seed) is trained on the 11 standardized features across all stations and parameters. The architecture is therefore: <em>local baselines, global anomaly criterion</em> — each reading is described relative to its own series’ history, and the forest learns one consistent notion of “how unusual is this deviation” across the watershed. Raw scores are min-max normalized to [0, 1]; the output is deterministic (identical file hash on re-run).</p>
+<p><strong>Driver hints — interpretability without a black box.</strong> For every flagged reading we compute per-feature z-scores against the population and report the top 3 by magnitude. An operator reads “rolling_mean_30: +3.0” as “this value sits three standard deviations above the station’s 30-reading average.” No SHAP or surrogate models — at this scale, plain z-scores are transparent and auditable.</p>
+<p><strong>Risk score.</strong> Each station gets a 0–100 score: mean anomaly score (normalized across stations, weight 60) plus anomaly rate (normalized across stations, weight 40), mapped to Safe / Watch / Concern. Because both components are normalized <strong>across the 8 stations</strong>, this is a <strong>relative prioritization within the monitored set</strong> — “which stations most deserve attention” — not an absolute probability of harm. The dashboard presents it as decision support with that guardrail stated.</p>
+<h2 id="why-this-design-suits-water-monitoring">3. Why This Design Suits Water Monitoring</h2>
+<ul>
+<li><strong>Local baselines respect that every station is different.</strong> A conductivity level that is normal at one station can be exceptional at another; per-series rolling statistics encode that without hand-set thresholds.</li>
+<li><strong>The multivariate view catches what single-parameter limits miss.</strong> A reading can be individually unremarkable on every parameter while the <em>combination</em> — a sustained level shift plus rising volatility plus an abrupt delta — is unusual. That combination is what the forest sees.</li>
+<li><strong>Irregular sampling is handled structurally, not ignored.</strong> Rate-of-change normalizes by elapsed time; gap flags mark records whose context is weak.</li>
+<li><strong>Results so far are physically sensible.</strong> At a fixed 5% contamination, per-station flag rates spread from 2.0% to 8.1% — the model discriminates between stations rather than flagging uniformly. Conductivity is the leading anomaly parameter at 5 of 8 stations, consistent with road-salt and effluent influence in this watershed. The strongest flagged reading is a conductivity excursion to ~10,900 µS/cm at Grand River at York — roughly an order of magnitude above typical river values and almost certainly a real event or a gross sampling error; either is worth surfacing. Driver analysis shows most flags are driven by <strong>sustained level shifts</strong> (rolling means) rather than single-reading spikes, i.e., the model is mostly detecting regime changes, not blips.</li>
+</ul>
+<h2 id="honest-limitations">4. Honest Limitations</h2>
+<p>We would rather state these ourselves than have a reviewer discover them.</p>
+<ol type="1">
+<li><strong>No validation against labeled events yet.</strong> The false-positive and false-negative rates are unknown. Until flagged anomalies are cross-referenced against known events (spills, storm events, treatment changes, advisories), “the model flags plausible things” is an informed judgment, not a measured result. This is the single most important Phase 2 task, and the reason we are seeking expert and community collaboration.</li>
+<li><strong>The 5% contamination rate is an assumption, not a finding.</strong> Isolation Forest requires an expected anomaly fraction a priori; we chose 5% as a starting point. The <em>ranking</em> of scores is informative regardless, but the binary flag threshold is arbitrary until calibrated against real events. We would welcome a domain-informed prior here.</li>
+<li><strong>Historical data only.</strong> The latest published PWQMN data ends December 2024. Phase 1 demonstrates the intelligence layer on historical records; it is not live monitoring, and the product says so explicitly.</li>
+<li><strong>Seasonality is absorbed only implicitly.</strong> Reading-count windows at roughly monthly sampling blur seasonal structure into the baseline rather than modeling it. Slow seasonal transitions can inflate baseline variance and mask genuine anomalies (or occasionally create spurious ones at season boundaries).</li>
+<li><strong>Global model trade-off.</strong> One forest across all stations gives cross-station consistency and more training data, but a station whose dynamics differ strongly from the pool could be systematically over- or under-flagged. Comparing global vs per-station models is a planned Phase 2 experiment.</li>
+<li><strong>The risk score is relative.</strong> It ranks the monitored stations against each other; it is not an absolute measure and would need re-interpretation as stations are added.</li>
+<li><strong>The model learns from numbers only.</strong> It has no knowledge of land use, upstream activity, weather, flow conditions, or Indigenous knowledge of the river. It is a statistical instrument intended to sit alongside — never replace — human and community expertise.</li>
+</ol>
+<h2 id="phase-2-what-validation-and-improvement-look-like">5. Phase 2 — What Validation and Improvement Look Like</h2>
+<p>In priority order:</p>
+<ol type="1">
+<li><strong>Event cross-referencing (validation).</strong> Compare flagged anomalies against documented events — provincial spill records, storm/flood records, treatment interventions — to estimate real precision and recall. Community and expert input on which historical events to test against is the most valuable contribution a partner can make.</li>
+<li><strong>Hydrological context as model inputs.</strong> Correlate with flow and precipitation (ECCC hydrometric and weather data are public and near-real-time): rain-event → turbidity lag structure, flow-normalized concentrations, and flow-aware baselines.</li>
+<li><strong>Explicit seasonal handling.</strong> Seasonal decomposition or season-conditioned baselines, so seasonal transitions stop consuming baseline variance.</li>
+<li><strong>Contamination calibration and per-station model comparison,</strong> informed by (1).</li>
+<li><strong>Supervised layer where labels emerge.</strong> If a partner can label even a modest set of historical events, a supervised classifier can complement the unsupervised layer rather than replace it.</li>
+<li><strong>Near-real-time operation</strong> on sensor or SCADA feeds where a community chooses to share them — under data-governance terms (OCAP®) in which the community retains full ownership and control of its data.</li>
+</ol>
+<hr />
+<h2 id="annex-preliminary-event-cross-reference">6. Annex — Preliminary Event Cross-Reference</h2>
+<p>This annex reports preliminary correlation against public records only; it is not formal model validation. It directly addresses Limitation #1 and aligns with Phase 2 item #1 by documenting which top anomalies were corroborated, and where no matching public record was found.</p>
+<p>Current annex summary (top 25 anomalies): 6 High-confidence matches, 2 Possible matches, and 17 with no public-record match in the configured window.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>station_id</th>
+<th>date</th>
+<th>parameter</th>
+<th>value</th>
+<th>anomaly_score</th>
+<th>top_drivers</th>
+<th>matched_event_type</th>
+<th>matched_event_date</th>
+<th>matched_event_description</th>
+<th>confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>16018409202</td>
+<td>2021-01-27</td>
+<td>CONDUCTIVITY, AMBIENT</td>
+<td>10900.0</td>
+<td>1.0</td>
+<td>delta, rolling_std_7, rate_of_change (66.35, 44.55, 40.36)</td>
+<td>data_quality</td>
+<td>2021-01-27</td>
+<td>Same-visit field/lab conductivity divergence at York (CONDAM 10900 vs COND25 1020, water temp 0.8C); consistent with instrument/data-quality issue rather than a confirmed contamination event.</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>16018409202</td>
+<td>2021-02-23</td>
+<td>CONDUCTIVITY, AMBIENT</td>
+<td>1208.0</td>
+<td>0.9641</td>
+<td>rate_of_change, delta, rolling_std_7 (-70.20, -65.02, 44.25)</td>
+<td>flow_spike</td>
+<td>2021-02-26</td>
+<td>Hydrometric flow spike at gauge 02GB010 near anomaly date.</td>
+<td>Possible</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2019-09-11</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>3580.0</td>
+<td>0.9588</td>
+<td>rate_of_change, delta, rolling_std_30 (14.34, 13.75, 12.89)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2020-10-08</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>486.0</td>
+<td>0.9563</td>
+<td>rolling_std_7, rolling_std_30, rolling_std_14 (12.59, 12.52, 12.27)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2019-10-09</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>559.0</td>
+<td>0.9556</td>
+<td>rate_of_change, delta, rolling_std_30 (-21.10, -20.27, 13.82)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018401202</td>
+<td>2019-06-13</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>142.0</td>
+<td>0.9517</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (16.41, 16.08, 13.65)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2020-01-13</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>973.0</td>
+<td>0.9371</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (13.06, 12.79, 11.67)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2019-09-11</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>2330.0</td>
+<td>0.9318</td>
+<td>rate_of_change, delta, rolling_std_30 (9.64, 9.25, 8.43)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2019-10-09</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>350.0</td>
+<td>0.9318</td>
+<td>rate_of_change, delta, rolling_std_30 (-13.83, -13.28, 9.08)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2020-01-13</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>1040.0</td>
+<td>0.9314</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (8.48, 8.31, 7.50)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2020-03-11</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>753.0</td>
+<td>0.9261</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (12.63, 12.37, 12.04)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2020-11-24</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>262.0</td>
+<td>0.9205</td>
+<td>rolling_std_7, rolling_std_30, rolling_std_14 (13.09, 12.62, 12.36)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409202</td>
+<td>2021-03-09</td>
+<td>CONDUCTIVITY, AMBIENT</td>
+<td>981.0</td>
+<td>0.9184</td>
+<td>rolling_std_7, rolling_std_14, rolling_std_30 (43.77, 36.73, 35.13)</td>
+<td>flow_spike</td>
+<td>2021-03-02</td>
+<td>Hydrometric flow spike at gauge 02GB010 near anomaly date.</td>
+<td>Possible</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2020-10-08</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>310.0</td>
+<td>0.9145</td>
+<td>rolling_std_30, rolling_std_7, rolling_std_14 (8.12, 8.09, 7.95)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018402702</td>
+<td>2020-01-13</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>1750.0</td>
+<td>0.9018</td>
+<td>delta, rolling_std_30, rolling_std_14 (10.29, 7.70, 7.54)</td>
+<td>flow_spike</td>
+<td>2020-01-12</td>
+<td>Hydrometric flow spike at gauge 02GB001 near anomaly date.</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>16018409302</td>
+<td>2020-03-11</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>638.0</td>
+<td>0.8973</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (8.09, 7.92, 7.63)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018403502</td>
+<td>2020-01-13</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>1710.0</td>
+<td>0.8891</td>
+<td>delta, rate_of_change, rolling_std_7 (9.78, 8.14, 5.77)</td>
+<td>flow_spike</td>
+<td>2020-01-12</td>
+<td>Hydrometric flow spike at gauge 02GB010 near anomaly date.</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>16018402702</td>
+<td>2020-01-13</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>1570.0</td>
+<td>0.8804</td>
+<td>delta, rolling_std_30, rolling_std_14 (9.71, 7.11, 6.96)</td>
+<td>flow_spike</td>
+<td>2020-01-12</td>
+<td>Hydrometric flow spike at gauge 02GB001 near anomaly date.</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>16018402702</td>
+<td>2020-10-08</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>56.6</td>
+<td>0.8792</td>
+<td>rolling_std_30, rolling_std_7, rolling_std_14 (7.31, 7.20, 7.16)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018402702</td>
+<td>2020-10-08</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>22.3</td>
+<td>0.8722</td>
+<td>rolling_std_30, rolling_std_7, rolling_std_14 (6.99, 6.86, 6.85)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018409302</td>
+<td>2019-11-06</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>603.0</td>
+<td>0.8718</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (13.82, 13.53, 11.49)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>16018401202</td>
+<td>2019-07-17</td>
+<td>IRON, UNFILTERED TOTAL</td>
+<td>585.0</td>
+<td>0.8708</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (11.95, 11.70, 9.93)</td>
+<td>flow_spike</td>
+<td>2019-07-17</td>
+<td>Hydrometric flow spike at gauge 02GA003 near anomaly date.</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>16018403502</td>
+<td>2024-10-31</td>
+<td>HARDNESS</td>
+<td>1460.0</td>
+<td>0.8697</td>
+<td>delta, rate_of_change, zscore (7.70, 5.91, 5.86)</td>
+<td>flow_spike</td>
+<td>2024-10-31</td>
+<td>Hydrometric flow spike at gauge 02GB010 near anomaly date.</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>16018401202</td>
+<td>2019-06-13</td>
+<td>ALUMINIUM, UNFILTERED TOTAL</td>
+<td>64.7</td>
+<td>0.8635</td>
+<td>rolling_std_30, rolling_std_14, rolling_std_7 (9.84, 9.64, 8.18)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>16018403502</td>
+<td>2023-02-22</td>
+<td>STRONTIUM</td>
+<td>502.0</td>
+<td>0.862</td>
+<td>rate_of_change, delta, rolling_mean_14 (-10.27, -5.29, 5.27)</td>
+<td>none</td>
+<td></td>
+<td>No public spill or flow-spike match found in the window.</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><em>Contact: Mike · Gemini Matrix Consulting · geminimatrixinc@gmail.com · Live dashboard: water.geminimatrixinc.com/dashboard</em></p>
+</body>
+</html>

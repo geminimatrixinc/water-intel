@@ -5,6 +5,8 @@ Handles loading and normalizing data from various sources (ECCC, etc.)
 """
 
 from .eccc_loader import ECCCLoader, load_eccc_data
+from .spills_loader import load_spills
+from .hydrometric_loader import load_flow_spikes
 from .schema import (
     SchemaType,
     RAW_REQUIRED_COLUMNS,
@@ -22,6 +24,8 @@ from .validate import (
 __all__ = [
     'ECCCLoader',
     'load_eccc_data',
+    'load_spills',
+    'load_flow_spikes',
     'SchemaType',
     'RAW_REQUIRED_COLUMNS',
     'NORMALIZED_REQUIRED_COLUMNS',

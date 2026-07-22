@@ -4,6 +4,37 @@
 
 ---
 
+### 2026-07-22 — Credentials Gate: IBD Confirmed, CCIB Membership Approved
+- ✅ Done: IBD registration confirmed active and verified (Gemini Matrix Consulting Inc., address updated to Ohsweken)
+- ✅ Done: CCIB (formerly CCAB) membership approved; CIB certification application submitted as the next step
+- 🟡 Open: CIB *certification* approval still needs explicit confirmation (separate from, and after, membership); Shareholders Registry drafted but unsigned — likely the blocker on certification approval
+- 🔥 Next: sign/date Shareholders Registry, confirm CIB certification status, then IBD NAICS-code/website optimization pass ([day19a](planning/tasks/day19a_gate_credentials.md))
+
+### 2026-07-21 — Day 20a: Event Cross-Reference Validation (revision pass complete)
+- ✅ Done: fixed municipality join in `ml/src/validation/event_crossref.py` — word-boundary matching with short-form keys (BRANTFORD/BRANT/HALDIMAND/WATERLOO) + ALNWICK-HALDIMAND false-positive exclusion; previous exact-equality join silently missed all spill candidates for several stations
+- ✅ Done: same-visit collapse (`co_flagged_parameters`) — iron+aluminum flagged together now count as one event; 660 flagged readings → 263 distinct station-visit events
+- ✅ Done: 5-per-station cap — annex now covers 7 of 8 stations instead of being dominated by Fairchild Creek repeats
+- ✅ Done: matched-event descriptions now reference the *nearest* event (with day distance) instead of the earliest in window — descriptions and confidence tiers are now consistent for reviewers who cross-check dates
+- ✅ Done: regenerated `outputs/anomaly_event_annex.csv` (25 events: 9 High / 4 Possible / 12 None) and rewrote brief Section 6 (method, findings, honest caveat, new table); aligned Section 3 York sentence with the data-quality resolution
+- 🧠 Learned: the Jan 13 2020 event strengthened under revision — now visible at **5 of 8 stations** with same-day flow spikes at 2 independent gauges; a second multi-station event (Mar 10–11 2020) surfaced; zero spill matches is now a *sound* null (3,749 surface-water records properly evaluated at county-level resolution)
+- 🧠 Learned: Fairchild Creek's 5 uncorroborated events + dead flow gauge (02GB007, no post-2019 data) = the honest open question for the expert review — real local pattern vs global-model over-flagging (brief Limitation #5)
+- 🔥 Next: regenerate brief PDF, draft Colin follow-up email (~Aug 5) leading with "you asked about event data"; leftover polish items parked in `planning/tasks/day20b_ui_and_general_improvements.md`
+
+### 2026-07-14 — Technical Brief Shipped + Planning Recalibration
+- ✅ Done: wrote `docs/TECHNICAL_BRIEF.md` (5 sections, hydrology-reviewer audience, all claims verified against pipeline code) and rendered it to a 3-page professional PDF (`docs/Water-Intel_Technical_Brief_July2026.pdf`)
+- ✅ Done: sent the brief to Colin Gibson as a reply in the June 25 meeting thread — closes the offer made in the thank-you email; ball now in his court (no further nudges; ~Aug 4 fallback lifts the hold on parallel McMaster outreach)
+- ✅ Done: full CTO-level planning review — corrected Innovations Canada model (challenge-based procurement, not open grant), flagged SR&ED expenditure trap (unpaid founder labour not claimable), added liability/E&O + program-change + solo-founder risks to the business plan, refreshed stale timeline
+- ✅ Done: new gated tasks — day24 (real-time ECCC/GRCA data spike) and day25 (second-vertical proof on public well data); validation-annex upgrade added to day19_5
+- 🧠 Learned: the expert meeting was only ever *mentioned*, never scheduled — gate follow-on work on dates, not on events other people control; a forwardable artifact is what converts a verbal intention into a meeting
+- 🔥 Next: credentials time-box (IBD verify + CCAB submission), then validation annex as the second touchpoint
+
+### 2026-05-03 — Corporate Site + Water-Intel Production Deployment
+- ✅ Done: deployed the Gemini Matrix corporate website to Hostinger on the production domain
+- ✅ Done: deployed the Water-Intel dashboard plus FastAPI backend to Hostinger and brought the live dashboard up at `water.geminimatrixinc.com`
+- ✅ Done: updated the corporate site navigation so it links into the live Water-Intel dashboard
+- 🧠 Learned: `outputs/*.csv` are runtime dependencies for the deployed MVP even though they remain generated artifacts, so deployment must either upload them or regenerate them on the server
+- 🔥 Next: move into Day 18 outreach and Day 19 funding-prep work, and decide whether future deploys should generate `outputs/` automatically or track a committed demo artifact set
+
 ### 2026-05-03 — Repository Structure Refactor
 - ✅ Done: moved the canonical FastAPI app to `services/api/main.py` and kept `api/main.py` plus `api/requirements.txt` as compatibility shims
 - ✅ Done: moved the canonical dashboard launcher to `ops/scripts/run-dashboard.ps1` and kept the root `run-dashboard.ps1` as a forwarding wrapper

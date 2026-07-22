@@ -2,7 +2,8 @@
 
 **Sprint:** Week 5 — MCP Agent Architecture  
 **Status:** 🔲 Not Started  
-**Depends on:** Day 12 (FastAPI running), Day 14 (demo pack shipped)
+**Depends on:** Day 12 (FastAPI running), Day 14 (demo pack shipped)  
+**▶ OK to build once Track A is in motion** (see [gate_credentials_and_funding.md](gate_credentials_and_funding.md)). This is low-lift (wraps existing endpoints) and *strengthens* the IRAP/Mitacs funding pitch — so it's allowed in parallel with the credentials/funding work. The **expensive** agent work (Days 21–23) is what's deferred until a funded pilot asks for it.
 
 ---
 

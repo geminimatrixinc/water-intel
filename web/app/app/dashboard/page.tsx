@@ -68,6 +68,19 @@ function siteStatusIcon(status: RiskLabel) {
   return "danger";
 }
 
+function buildSiteContextChip(site: SiteSummary): string | null {
+  if (site.has_data_quality_flag) {
+    return "possible sensor issue";
+  }
+
+  const corroboratedCount = site.corroborated_event_count;
+  if (typeof corroboratedCount === "number" && corroboratedCount > 0) {
+    return `${corroboratedCount} corroborated ${corroboratedCount === 1 ? "event" : "events"}`;
+  }
+
+  return null;
+}
+
 export default async function DashboardPage() {
   let sites: SiteSummary[] = [];
   let errorMessage: string | null = null;
@@ -219,6 +232,7 @@ export default async function DashboardPage() {
             const emphasisColor = siteInsightColor(site.risk_label);
             const badgeStyle = siteStatusBadgeStyle(site.risk_label);
             const statusIcon = siteStatusIcon(site.risk_label);
+            const contextChip = buildSiteContextChip(site);
             return (
           <Link
             key={site.station_id}
@@ -340,6 +354,25 @@ export default async function DashboardPage() {
                   {site.risk_label}
                 </span>
               </div>
+              {contextChip ? (
+                <div
+                  style={{
+                    marginTop: 8,
+                    maxWidth: 132,
+                    borderRadius: 999,
+                    padding: "5px 9px",
+                    border: "1px solid rgba(161, 161, 170, 0.28)",
+                    background: "rgba(39, 39, 42, 0.65)",
+                    color: "#a1a1aa",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    textAlign: "center",
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {contextChip}
+                </div>
+              ) : null}
             </div>
           </Link>
             );

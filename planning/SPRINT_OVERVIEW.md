@@ -1,7 +1,7 @@
 # Sprint Overview — Phase 1 MVP
 
 > Water-Intel | Gemini Matrix Consulting  
-> Updated: 2026-04-15
+> Updated: 2026-07-14
 
 ---
 
@@ -12,14 +12,15 @@
 | **1** | Pipeline + First ML Result | 3–8 | ✅ Complete |
 | **2** | Model + Explanations + Reports | 8–11 | ✅ Complete |
 | **3** | API + UI + Demo Pack | 12–14 | 🟡 In Progress |
-| **4** | Company Website + Traction + Funding | 15–19 | 🔲 Not Started |
+| **4** | Company Website + Traction + Funding | 15–19 | 🟡 In Progress |
 | **5** | MCP Agent Architecture | 20–23 | 🔲 Not Started |
 
 ## Current Focus Reminder
 
 - The dashboard and detail views are good enough for this phase unless a real bug or credibility issue appears.
-- Additional UI polish now has diminishing returns compared with the remaining packaging and traction work.
-- Current priority order: Day 14 packaging, Day 16 company site, technical/pilot brief, guided Ask Water-Intel experience, then MCP build.
+- The corporate site and the live Water-Intel dashboard are now deployed on Hostinger.
+- **Current priority order (July 14):** technical brief + validation memo (expert-meeting window is open NOW), credentials time-box (IBD/CCAB), Innovations Canada portal monitor, SR&ED log. See `planning/THIS_WEEK.md`.
+- After the brief ships: optional gated spikes — day24 (real-time data feed) and day25 (second vertical proof).
 
 ---
 
@@ -67,14 +68,17 @@ Day 5: build_processed.py
 | 13 | Dashboard wiring | [day13](tasks/done/day13_dashboard.md) | ✅ Done |
 | 14 | Demo pack + pilot one-pager | [day14](tasks/day14_demo_pack.md) | 🟡 |
 | 15 | Demo video + business doc review | [days15–19](tasks/days15-19_traction.md) | 🔲 |
-| 16 | Gemini Matrix company website | [day16](tasks/day16_company_website.md) | 🔲 |
-| 17 | HostSigner deploy + domain | [day17](tasks/day17_hostsigner_deploy.md) | 🔲 |
+| 16 | Gemini Matrix company website | [day16](tasks/done/day16_company_website.md) | ✅ Done |
+| 17 | Hostinger deploy + domain | [day17](tasks/done/day17_hostsigner_deploy.md) | ✅ Done |
 | 18 | Pilot outreach + grant research | [days15–19](tasks/days15-19_traction.md) | 🔲 |
 | 19 | Funding application skeleton | [days15–19](tasks/days15-19_traction.md) | 🔲 |
+| 19.5 | Expert prep: technical brief + validation memo | [day19.5](tasks/day19_5_post_meeting_expert_prep.md) | 🟡 **P1 NOW** |
 | **20** | **MCP Server (expose tools)** | [day20](tasks/day20_mcp_server.md) | 🔲 |
-| **21** | **MCP Client (consume agents)** | [day21](tasks/day21_mcp_client.md) | 🔲 |
-| **22** | **Autonomous Water Agent** | [day22](tasks/day22_water_agent.md) | 🔲 |
-| **23** | **Agent Demo Pack + Federation** | [day23](tasks/day23_agent_demo_pack.md) | 🔲 |
+| **21** | **MCP Client (consume agents)** | [day21](tasks/day21_mcp_client.md) | 🔲 deferred until funded pilot |
+| **22** | **Autonomous Water Agent** | [day22](tasks/day22_water_agent.md) | 🔲 deferred until funded pilot |
+| **23** | **Agent Demo Pack + Federation** | [day23](tasks/day23_agent_demo_pack.md) | 🔲 deferred until funded pilot |
+| 24 | Real-time data spike (ECCC/GRCA live feed) | [day24](tasks/day24_realtime_data_spike.md) | 🔲 gated: after brief |
+| 25 | Second vertical spike (abandoned wells) | [day25](tasks/day25_second_vertical_spike.md) | 🔲 gated: if thread stays warm |
 
 ---
 
@@ -90,7 +94,7 @@ Day 5: build_processed.py
 | Scope creep (adding features before demo works) | Never ships | Strict daily plan, scrum discipline, "ship then polish" |
 | Continuing to polish dashboard/detail after the product story is already clear enough | Slows traction work | Treat dashboard/detail as phase-complete and only reopen for bugs or credibility gaps discovered during packaging |
 | Company website delays MVP pipeline work | Demo not ready | Website is Week 4 (after pipeline); don't start early |
-| HostSigner deployment issues | No public presence | Have Vercel free tier as fallback |
+| Hostinger deployment issues | No public presence | Have Vercel free tier as fallback |
 | MCP SDK breaking changes | Agent work blocked | Pin SDK version; MCP spec is stable as of 2026 |
 | LLM API costs for agent reasoning | Budget concern | Use Claude Haiku for dev/demo (~$0.01/query); Sonnet for prod |
 | External data sources unavailable as MCP | Can't show mesh | Build simulated external MCP servers for demo (Day 21) |
@@ -104,7 +108,7 @@ Day 5: build_processed.py
 - [ ] Risk scores displayed with color-coded labels
 - [ ] Anomaly table with "what triggered it" hints
 - [ ] Pilot one-pager ready for distribution
-- [ ] Company website live on HostSigner with Water-Intel product page
+- [x] Company website live on Hostinger with Water-Intel product page
 - [ ] Mission statement and business plan finalized
 - [ ] Funding strategy documented with target programs
 - [ ] All guardrails (2A proxy disclaimer) in place

@@ -119,10 +119,19 @@ Each day ends with:
 - **Day 11:** Risk scoring — 0–100 risk score + Safe/Watch/Concern labels added to site summaries
 - **Day 12:** FastAPI backend — CSV-backed API endpoints implemented and verified locally with CORS
 - **Day 13:** Dashboard wiring — Next.js dashboard now renders live site summaries, risk details, anomaly table, and anomaly timeline from FastAPI
+- **Day 16:** Gemini Matrix company website built and deployed to Hostinger with Water-Intel included in the public navigation
+- **Day 17:** Production deployment live — corporate site and Water-Intel dashboard are running on Hostinger, with the dashboard exposed at `water.geminimatrixinc.com`
 - **Planning:** Task breakdown created in `planning/tasks/`, PROGRESS.md started, architecture documented, pilot targets + AI outreach playbook
 
 ### Current focus ▶
-- **Day 14:** Demo pack + pilot-ready artifacts built around the live dashboard flow
+- **Week of July 14 (NOW):** Expert-meeting readiness — see `planning/THIS_WEEK.md`
+  - **P1: Technical brief** (`docs/TECHNICAL_BRIEF.md`) — overdue; Colin silent since June 25, so the brief is now also the re-engagement move (send it as the follow-up, not a bare check-in)
+  - **P1b: Mini validation memo** — top anomalies cross-referenced against public event records, annexed to the brief
+  - **P2: Credentials time-box** — IBD verification + CCAB application in flight (has slipped 6 weeks; calendar-block it)
+  - **P3 (corrected):** Innovations Canada = challenge-portal monitoring (not an application); SR&ED log with expenditure reality-check (unpaid founder labour is not claimable)
+  - **Late July:** Grand River Champion of Champions Powwow — confirm dates, attend as community member
+- **Post-brief options (gated, timeboxed):** [day24 real-time data spike](tasks/day24_realtime_data_spike.md) — live ECCC/GRCA feed kills the stale-data caveat and proves the second-loader architecture claim; [day25 second-vertical spike](tasks/day25_second_vertical_spike.md) — only if the Colin drone/wells thread stays warm
+- **Note:** Day 14 packaging remains parked unless outreach conversations prove it is now the blocking asset
 
 ### Task Files
 Detailed acceptance criteria for each day: `planning/tasks/`
@@ -330,7 +339,7 @@ Detailed acceptance criteria for each day: `planning/tasks/`
 # Week 4 (Traction Week) — Company Presence + Credibility + Funding
 
 > Goal: stop building new product features unless a partner requests it.
-> Focus: company website, HostSigner deployment, outreach, funding applications, and a public-facing story that makes it obvious Water-Intel is more than a chart portal.
+> Focus: company website, Hostinger deployment, outreach, funding applications, and a public-facing story that makes it obvious Water-Intel is more than a chart portal.
 
 ### Day 15 — Record 90-second demo video + finalize business docs
 **Deliverable**
@@ -345,7 +354,7 @@ Detailed acceptance criteria for each day: `planning/tasks/`
 - Includes 3–5 example operator questions such as "Why is this site flagged?" or "Which upstream sites changed the most?"
 - Includes a concise technical brief / pilot brief link for funders, technical reviewers, and serious partners who want the deeper rationale behind the product
 
-### Day 17 — HostSigner deployment + public demo surface
+### Day 17 — Hostinger deployment + public demo surface
 **Deliverable**
 - Deploy company website and Water-Intel product page to a public URL
 - Add a guided Ask Water-Intel section or mock conversational demo so a non-technical viewer can tell in under 30 seconds that the product is not just another monitoring portal
@@ -375,8 +384,8 @@ Detailed acceptance criteria for each day: `planning/tasks/`
 
 We are "Week 4 done" when all are true:
 - [ ] 90-second demo works without explaining ML
-- [ ] Dashboard shows real anomaly/risk output
-- [ ] Company website live on HostSigner with custom domain
+- [x] Dashboard shows real anomaly/risk output
+- [x] Company website live on Hostinger with custom domain
 - [ ] Water-Intel product page on company site with screenshots/demo and Ask Water-Intel positioning
 - [ ] Water-Intel technical brief or pilot brief is available from the product page
 - [ ] Mission statement and business plan finalized
@@ -561,6 +570,10 @@ MCP is uniquely suited for Indigenous data governance:
 
 # Backlog (only if needed / requested by pilot partner)
 
+- **Real-time public data feed** (ECCC hydrometric / GRCA) — promoted to gated task: `tasks/day24_realtime_data_spike.md`
+- **Second vertical proof on public data** (abandoned wells) — gated task: `tasks/day25_second_vertical_spike.md`
+- Anomaly→event validation harness (formalize the validation memo into a repeatable backtest once labeled events accumulate)
+- Deployment automation (regenerate `outputs/*.csv` on deploy instead of hand-uploading; single CI script is enough)
 - Authentication + roles (operator vs leadership)
 - Multi-tenant data isolation (community-by-community)
 - Map view / watershed visualization

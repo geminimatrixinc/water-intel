@@ -6,13 +6,21 @@ param(
     [int]$WebPort = 3000,
     [int]$ApiPort = 8000,
     [int]$TimeoutSeconds = 120,
-    [switch]$NoBrowser
+    [switch]$NoBrowser,
+    [switch]$StopOnly
 )
 
 $ErrorActionPreference = "Stop"
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $webDir = Join-Path $repoRoot "web\app"
+$versionFilePath = Join-Path $repoRoot "VERSION"
+
+function Test-IsAdministrator {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal]::new($identity)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
 
 function Quote-Single([string]$Value) {
     return $Value -replace "'", "''"
@@ -64,6 +72,124 @@ function Test-PortListening([int]$Port) {
     }
 }
 
+function Get-ListenerProcessIds([int[]]$Ports) {
+    $ids = @()
+
+    foreach ($port in $Ports) {
+        try {
+            $portIds = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction Stop |
+                Select-Object -ExpandProperty OwningProcess -Unique
+            if ($portIds) {
+                $ids += $portIds
+            }
+        }
+        catch {
+            # No listener for this port.
+        }
+    }
+
+    return $ids |
+        Where-Object { $_ -and ($_ -gt 0) } |
+        Select-Object -Unique
+}
+
+function Show-AdminPortHelp([int[]]$Ports) {
+    $portCsv = ($Ports | Sort-Object -Unique) -join ","
+    Write-Host "The remaining listeners may be owned by protected host processes." -ForegroundColor Yellow
+    Write-Host "Run these commands from an elevated PowerShell:" -ForegroundColor Yellow
+    Write-Host "  wsl --shutdown"
+    Write-Host "  netstat -ano | findstr :$($Ports[0])"
+    if ($Ports.Count -gt 1) {
+        Write-Host "  netstat -ano | findstr :$($Ports[1])"
+    }
+    Write-Host "  # Then stop listed PIDs if needed: taskkill /PID <pid> /F /T"
+    Write-Host "Requested ports: $portCsv"
+}
+
+function Clear-TargetPorts([int[]]$Ports) {
+    $ports = $Ports | Sort-Object -Unique
+    if (-not $ports -or $ports.Count -eq 0) {
+        return $true
+    }
+
+    $processIds = Get-ListenerProcessIds -Ports $ports
+    if ($processIds.Count -gt 0) {
+        Write-Host "Stopping listeners on ports $($ports -join ', ')..." -ForegroundColor Cyan
+    }
+
+    foreach ($processId in $processIds) {
+        Stop-Process -Id $processId -Force -ErrorAction SilentlyContinue
+        try {
+            & taskkill /PID $processId /F /T *> $null
+        }
+        catch {
+            # Ignore races where the target PID exits before taskkill runs.
+        }
+    }
+
+    $remaining = Get-ListenerProcessIds -Ports $ports
+    if ($remaining.Count -gt 0 -and (Test-CommandExists "wsl.exe" -or Test-CommandExists "wsl")) {
+        Write-Host "Some listeners persisted; shutting down WSL forwarding..." -ForegroundColor Yellow
+        & wsl.exe --shutdown *> $null
+        $remaining = Get-ListenerProcessIds -Ports $ports
+    }
+
+    if ($remaining.Count -eq 0) {
+        return $true
+    }
+
+    Write-Host "Could not release all requested ports." -ForegroundColor Red
+    foreach ($port in $ports) {
+        try {
+            $rows = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction Stop |
+                Select-Object LocalAddress, LocalPort, OwningProcess, State
+            if ($rows) {
+                $rows | Format-Table -AutoSize | Out-Host
+            }
+        }
+        catch {
+            # No listener for this port.
+        }
+    }
+
+    if (-not (Test-IsAdministrator)) {
+        Show-AdminPortHelp -Ports $ports
+    }
+
+    return $false
+}
+
+function Get-ExpectedApiVersion {
+    if (-not (Test-Path $versionFilePath)) {
+        return $null
+    }
+
+    try {
+        $value = (Get-Content -Path $versionFilePath -Raw).Trim()
+        if ([string]::IsNullOrWhiteSpace($value)) {
+            return $null
+        }
+        return $value
+    }
+    catch {
+        return $null
+    }
+}
+
+function Get-ApiVersion([string]$Url) {
+    try {
+        $response = Invoke-RestMethod -Uri $Url -TimeoutSec 5
+        if ($response -and $response.version) {
+            return [string]$response.version
+        }
+    }
+    catch {
+        # Unhealthy API or non-JSON response.
+    }
+
+    return $null
+}
+
 function Start-ServiceWindow([string]$Label, [string]$WorkingDirectory, [string]$Command) {
     $startupCommand = "Set-Location -LiteralPath '" + (Quote-Single $WorkingDirectory) + "'; " + $Command
     Write-Host "Starting $Label..." -ForegroundColor Cyan
@@ -100,14 +226,50 @@ if (-not (Test-CommandExists "npm")) {
 $pythonLaunch = Get-PythonLaunchCommand
 $apiCommand = "$pythonLaunch -m uvicorn services.api.main:app --reload"
 $webCommand = "npm run dev"
+$expectedApiVersion = Get-ExpectedApiVersion
+
+if ($StopOnly) {
+    if (-not (Clear-TargetPorts -Ports @($ApiPort, $WebPort))) {
+        throw "Failed to clear one or more requested ports."
+    }
+
+    Write-Host "Ports cleared successfully: $ApiPort, $WebPort" -ForegroundColor Green
+    return
+}
+
+$startApi = $false
 
 if (Test-UrlHealthy $ApiHealthUrl) {
-    Write-Host "API is already running." -ForegroundColor Yellow
+    $runningVersion = Get-ApiVersion -Url $ApiHealthUrl
+    if ($expectedApiVersion -and $runningVersion -and $runningVersion -ne $expectedApiVersion) {
+        Write-Host (
+            "API is running but version is {0}; expected {1}. Restarting API..." -f
+            $runningVersion,
+            $expectedApiVersion
+        ) -ForegroundColor Yellow
+
+        if (-not (Clear-TargetPorts -Ports @($ApiPort))) {
+            throw "Port $ApiPort is in use by a stale API and could not be released."
+        }
+
+        $startApi = $true
+    }
+    else {
+        Write-Host "API is already running." -ForegroundColor Yellow
+    }
 }
 elseif (Test-PortListening $ApiPort) {
-    throw "Port $ApiPort is already in use, but $ApiHealthUrl is not responding as expected."
+    Write-Host "Port $ApiPort is in use but health is not available. Attempting cleanup..." -ForegroundColor Yellow
+    if (-not (Clear-TargetPorts -Ports @($ApiPort))) {
+        throw "Port $ApiPort is already in use, but $ApiHealthUrl is not responding as expected."
+    }
+    $startApi = $true
 }
 else {
+    $startApi = $true
+}
+
+if ($startApi) {
     Start-ServiceWindow -Label "FastAPI backend" -WorkingDirectory $repoRoot -Command $apiCommand
 }
 

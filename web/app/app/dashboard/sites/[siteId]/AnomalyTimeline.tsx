@@ -47,6 +47,8 @@ export default function AnomalyTimeline({
 }: AnomalyTimelineProps) {
   const data = buildAnomalyTimeline(anomalies);
   const colors = timelineColors(riskLabel);
+  const flowSpikeMarkerColor = "#38bdf8";
+  const dataQualityMarkerColor = "#fcd34d";
 
   return (
     <div
@@ -107,6 +109,26 @@ export default function AnomalyTimeline({
               area: true,
               showMark: false,
             },
+            {
+              id: "flow-spike-marker",
+              dataKey: "flowSpikeMarker",
+              label: "Flow-spike corroboration",
+              color: flowSpikeMarkerColor,
+              curve: "linear",
+              area: false,
+              connectNulls: false,
+              showMark: true,
+            },
+            {
+              id: "data-quality-marker",
+              dataKey: "dataQualityMarker",
+              label: "Data-quality corroboration",
+              color: dataQualityMarkerColor,
+              curve: "linear",
+              area: false,
+              connectNulls: false,
+              showMark: true,
+            },
           ]}
           axisHighlight={{ x: "none", y: "none" }}
           skipAnimation
@@ -130,10 +152,26 @@ export default function AnomalyTimeline({
               strokeWidth: 3,
               filter: `drop-shadow(0 0 10px ${colors.glow})`,
             },
+            "& .MuiLineElement-series-flow-spike-marker": {
+              stroke: "transparent",
+              strokeWidth: 0,
+              filter: "none",
+            },
+            "& .MuiLineElement-series-data-quality-marker": {
+              stroke: "transparent",
+              strokeWidth: 0,
+              filter: "none",
+            },
             "& .MuiMarkElement-root": {
               fill: colors.stroke,
               stroke: "#ffffff",
               strokeWidth: 2,
+            },
+            "& .MuiMarkElement-series-flow-spike-marker": {
+              fill: flowSpikeMarkerColor,
+            },
+            "& .MuiMarkElement-series-data-quality-marker": {
+              fill: dataQualityMarkerColor,
             },
             "& .MuiAreaElement-root": {
               fill: "url(#anomalyTimelineGradient)",

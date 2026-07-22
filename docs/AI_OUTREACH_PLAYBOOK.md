@@ -313,3 +313,33 @@ He is a **warm backup**, not a first move. The play:
 **He may surprise you.** But don't count on it. Build the plan as if you're doing this alone. If he helps, it's a bonus.
 
 **Why wait:** Mike needs to own this process and build confidence in outreach before leaning on family connections. Running to a brother's network without trying first reinforces the avoidance pattern. But having him as a backup removes the "if I fail it's over" pressure — it's not over, there's a next move.
+
+---
+
+## Outreach Log
+
+Track every contact and meeting here. One row per attempt.
+
+| Date | Contact(s) | Role / Org | Channel | Event Type | Status | Next Step | Notes |
+|------|-----------|-----------|---------|-----------|--------|-----------|-------|
+| 2026-05-04 | Michael Montour | Director of Public Works, Six Nations | LinkedIn | Soft intro | Sent — no reply | Monitor | Framed as complementary to river gauge modernization. Let rest. |
+| 2026-05-07 | Ohneganos team | McMaster/Six Nations | Email | Soft intro | Sent | ✅ Warm reply | Colin replied May 26, forwarded to Dr. Down Martin-Hill + Six Nations Environment Dept. |
+| 2026-06-25 | Colin Gibson, Sara Smith, McMaster intern | McMaster Ohneganos + Six Nations Environment | **In-person meeting** | Technical review + partnership exploration | ✅ **COMPLETED** | **Follow Colin's next step** | **🟢 KEY OUTCOMES:** (1) They want to pilot water-quality POC with real data; (2) Mentioned separate drone/abandoned-oil-well vertical reusing same architecture; (3) Colin booking next meeting with external hydrological modelling expert from another university; (4) Timeline: "these things take time, more than 6 months" — permission to be patient. Mike positioned as tech expert seeking collaboration, not water expert pitching solution. |
+
+### Post-Meeting Actions (Mike — this week)
+- [x] Send thank-you email to Colin, Sara, and Natalie (evening of 06-25) ✅
+  - Thanked all three, offered technical brief, kept it warm and natural
+- [x] Call NRC IRAP (1-877-994-4727) — COMPLETED ✅
+  - **Result:** Does not qualify (requires 1 full-time T4 employee; Mike is solo)
+  - **Recommendation from NRC:** Contact Innovations Canada instead
+  - **Lesson:** IRAP is a future door (after hiring), not current path
+- [ ] **Call Innovations Canada** (recommended by NRC IRAP screener) — this week
+  - Ised Innovative Solutions Canada program
+  - May have better fit for solo founder / early-stage
+  - Get the contact info and eligibility requirements
+- [ ] **Prepare technical brief** on anomaly detection methodology (~2–3 pages) for hydrological expert review
+- [ ] Start SR&ED technical log (parallel, independent) — retroactive claim window is ticking; no T4 requirement
+- [ ] Research drone/oil-well vertical: data formats, public datasets, architecture reusability
+- [ ] **Reach out to Dr. Zobia Jawed** (McMaster, Mitacs Engage experience) — exploratory coffee/call about co-applicant possibility for Phase 2
+
+---
