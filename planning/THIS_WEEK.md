@@ -88,9 +88,13 @@ This also proves the "new vertical = new loader" architecture claim with a secon
 - [x] **Follow-up email sent to Colin with brief attached** ✅ July 14 — loop closed, ball in his court. Do not nudge again; ~Aug 4 fallback stands.
 - [ ] Validation memo annex (5–10 anomalies cross-referenced) — now doubles as the natural *second* touchpoint if Colin stays silent
 - [x] IBD verified + CCIB membership approved (2026-07-22) — CIB certification approval + shareholder registry signature still open
+- [x] IBD NAICS/website/description update emailed to REA-IBD@sac-isc.gc.ca ✅ July 22 (no self-serve edit exists) — verify in public directory ~Aug 5; escalate via navigator@sac-isc.gc.ca if silent
 - [ ] Innovations Canada portal checked (corrected model: challenges, not applications)
 - [ ] SR&ED log set up + expenditure reality-check done
-- [ ] Powwow July 24–26 blocked in calendar (verify venue at grpowwow.ca)
+- [x] Shareholders Registry — formal accountant version submitted ✅ (CIB certification now awaiting CCIB review only)
+- [ ] **Deploy updated Water-Intel to Hostinger** — validation work + regenerated `outputs/*.csv` (remember: outputs are runtime dependencies; upload or regenerate on server). Do this BEFORE sending brief v2 — the brief links to the live dashboard
+- [ ] **Send brief v2 to Colin ~July 28** (not sooner) — the validation annex (Section 6: 25 events, 9 high-confidence, multi-station Jan 2020 event) is genuinely new value, which makes it a legitimate second touchpoint rather than a nudge. Two weeks after v1 is the right spacing; ~Aug 4 fallback (open parallel McMaster outreach) still stands if v2 also goes silent
+- [~] Powwow July 24–26 — likely skipping. Fine: it was a zero-expectation, nice-to-have touchpoint. The deliberate local-presence play shifts to the Two Rivers CDC call ([day19e](tasks/day19e_two_rivers_local_network.md)) — 15 minutes, books the local relationship without a weekend commitment
 - [ ] (Stretch) Real-time data spike started
 
 ---

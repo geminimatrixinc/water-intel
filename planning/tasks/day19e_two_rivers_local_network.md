@@ -28,6 +28,22 @@ info@tworivers.ca · https://tworivers.ca
 - **Free product discovery for grant-intel.** Their client base *is* grant-intel's target user.
   One meeting answers "would your clients use a tool that finds set-asides and funding?"
 
+## AEP facts (verified 2026-07-22)
+
+- **Up to $99,999 non-repayable** for individual Indigenous entrepreneurs; up to $250K for
+  community-owned businesses. Federally funded (ISC), administered by NACCA, **delivered
+  through IFIs like Two Rivers** — you never apply to NACCA directly.
+- Program page: https://www.sac-isc.gc.ca/eng/1375201178602/1610797286236 · NACCA IFI
+  directory (reference only — your IFI is known): https://nacca.ca/
+- **Ask early: the owner equity-contribution requirement.** AEP typically expects the owner
+  to put in a real cash percentage — get the current figure in the first conversation so it's
+  not a late surprise.
+- **Don't assume it covers founder salary.** Eligible uses are usually establishment/expansion
+  costs (equipment, marketing, working capital, capacity) — confirm categories before writing
+  a budget.
+- **The package ≈ day19a Session 1 folder + `docs/BUSINESS_PLAN.md`** (incorporation,
+  ownership, proof of status, business plan) — most of the intake already exists.
+
 ## Steps — 4 short sessions
 
 ### Session 1 — Prep (~30 min)

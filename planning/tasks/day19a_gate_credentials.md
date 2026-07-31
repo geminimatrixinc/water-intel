@@ -45,16 +45,16 @@ Portal: https://services.sac-isc.gc.ca/REA-IBD/
 
 - [x] Log in and pull up the existing Gemini Matrix listing
 - [x] Confirm the ownership/control attestation is current (100% Indigenous-owned)
-- [ ] Update remaining basics: phone, email, **website = geminimatrixinc.com** (buyers click this) — address already updated, others not yet confirmed
-- [ ] Replace/confirm the business description with the Session 1 blurb (keywords buyers search: *artificial intelligence, machine learning, data analytics, software development, dashboards*)
-- [ ] **Fix the NAICS codes** — this is the entire point. You want the codes buyers search for AI/software work:
-  - **541514 / 541511 — Custom computer programming services** (primary)
-  - **541512 — Computer systems design services** (primary)
-  - **541690 or 541611 — consulting** (keep as secondary only)
-  - Add, don't just replace — multiple codes are allowed; more codes = more search hits
-- [ ] Save + screenshot the updated listing for your records
+- [x] Update remaining basics + description + NAICS — **update email sent to REA-IBD@sac-isc.gc.ca 2026-07-22** (the portal has no self-serve edit; ISC staff process profile changes). Requested:
+  - **541514 — Computer systems design and related services** (primary; this is the Canadian NAICS 2022 code — the earlier 541511/541512 guesses were US-style codes)
+  - **518210 — Data processing, hosting and related services** (the hosted-dashboard/SaaS side)
+  - **541620 — Environmental consulting services** (the water vertical)
+  - Existing consulting codes kept as secondary
+  - Website geminimatrixinc.com + AI/ML keyword description
+- [ ] **~Aug 5 verification:** search the *public* IBD directory (NAICS 541514, Ontario) and confirm Gemini Matrix appears — that search is literally how buyers find suppliers
+- [ ] If no reply / no change by ~Aug 5: escalate via the Indigenous Business Navigator (navigator@sac-isc.gc.ca, ~3 business day response)
 
-**Done when:** listing shows correct NAICS + website + AI/ML description. (Registration itself is done; this remaining list is the optimization pass.)
+**Done when:** the public directory shows the listing under 541514 with website + AI/ML description. (Registration ✅, address ✅, update request ✅ — awaiting ISC processing.)
 
 ### Session 3 — CCIB application (~45–60 min) — ✅ membership approved
 
@@ -73,6 +73,21 @@ Portal: https://www.ccab.com/main/ccab_member/certification/ (CCAB rebranded to 
 - [ ] Confirm whether CIB *certification* approval is complete — this is separate from and comes after membership approval
 - [ ] Sign and date the Shareholders Registry (drafted, unsigned — this is likely a blocker on certification approval)
 - [ ] Optional consistency follow-up: update the registered office address with ServiceOntario if the Articles still show the old Milton address
+
+**Membership activation (welcome email, 2026-07-22):**
+- [x] Directory profile form submitted — 147-word business description (doc filed in credentials
+      folder: `Gemini-Matrix_Business-Description_CCIB.docx`), keywords list, business types:
+      Computer Programming/Website Services · Consulting · Professional Services.
+      **Reuse this description verbatim in the IBD listing (Session 2 optimization pass).**
+- [ ] Register for the weekly member call (Thursdays 1–2pm EST) + add recurring Teams link to
+      calendar — attend and listen first; this is the standing warm room of members + corporate buyers
+- [ ] Members-area login (https://members.ccib.ca) → download membership certificate + CCIB logos
+      → credentials folder
+- [ ] Add CCIB member status/logo to email signature + geminimatrixinc.com footer (per CCIB
+      promotion guidelines; member status only — no "certified" claims until CIB approval lands)
+- [ ] Claim the complimentary e-newsletter member profile (5,000+ distribution) — pitch the
+      Water-Intel story, not a generic company intro; target within ~a month
+- [ ] Membership contact: Summer Jones, Manager, Membership · memberrelations@ccib.ca
 
 **Done when:** CIB certification status = approved (not just membership).
 

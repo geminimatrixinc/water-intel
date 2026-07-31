@@ -7,8 +7,9 @@
 ### 2026-07-22 — Credentials Gate: IBD Confirmed, CCIB Membership Approved
 - ✅ Done: IBD registration confirmed active and verified (Gemini Matrix Consulting Inc., address updated to Ohsweken)
 - ✅ Done: CCIB (formerly CCAB) membership approved; CIB certification application submitted as the next step
-- 🟡 Open: CIB *certification* approval still needs explicit confirmation (separate from, and after, membership); Shareholders Registry drafted but unsigned — likely the blocker on certification approval
-- 🔥 Next: sign/date Shareholders Registry, confirm CIB certification status, then IBD NAICS-code/website optimization pass ([day19a](planning/tasks/day19a_gate_credentials.md))
+- ✅ Done: IBD NAICS/description/website update email sent to **REA-IBD@sac-isc.gc.ca** (the portal has no self-serve edit — ISC staff process changes). Requested: NAICS **541514** (computer systems design, primary) + **518210** (data hosting) + **541620** (environmental consulting) added alongside existing codes; website geminimatrixinc.com; AI/ML business description
+- ✅ Resolved: Shareholders Registry — the formal version prepared by the accountant was submitted (supersedes the unsigned draft concern); CIB certification now purely awaiting CCIB review
+- 🔥 Next: deploy updated Water-Intel (validation work + regenerated outputs) to Hostinger → then send brief v2 (with Section 6 event validation) to Colin ~July 28; **~Aug 5**: verify public IBD directory shows NAICS 541514 — escalate to navigator@sac-isc.gc.ca if not
 
 ### 2026-07-21 — Day 20a: Event Cross-Reference Validation (revision pass complete)
 - ✅ Done: fixed municipality join in `ml/src/validation/event_crossref.py` — word-boundary matching with short-form keys (BRANTFORD/BRANT/HALDIMAND/WATERLOO) + ALNWICK-HALDIMAND false-positive exclusion; previous exact-equality join silently missed all spill candidates for several stations

@@ -24,6 +24,7 @@ Reference, grants, and first revenue realistically take **~12 months.** That's f
 | [day19_government_ai_support.md](day19_government_ai_support.md) | NRC IRAP call OR find alternative government AI support · **SR&ED** log started | 🟡 In progress (IRAP ineligible — T4 employee required; pivot to Innovations Canada) |
 | [day19a_gate_credentials.md](day19a_gate_credentials.md) | IBD verified (correct AI/ML NAICS) + CCAB submitted | 🔲 Not started |
 | [day19e_two_rivers_local_network.md](day19e_two_rivers_local_network.md) | Two Rivers CDC meeting held (AEP fit answered + local network opened) | 🔲 Not started (added 2026-07-15) |
+| [day19f_ai_source_list.md](day19f_ai_source_list.md) | Government of Canada AI Source List — ITQ document pulled + go/no-go decided | 🔲 Not started (added 2026-07-22). Real deadline **30 Sep 2026** — pull the actual mandatory-criteria doc by mid-Aug, don't let it crowd out Colin/Two Rivers/deploy now |
 
 **Update on Track A — Government AI Support (revised 2026-07-14):**
 - ❌ **NRC IRAP:** Does not qualify (requires 1 full-time T4 employee; solo founder ineligible)
